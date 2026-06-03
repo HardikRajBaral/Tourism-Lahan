@@ -20,7 +20,7 @@ export const updatePostSchema =z.object({
       .max(255, "Excerpt must be less than 255 characters")
       .optional(),
     content: z.string().min(1, "Content is required").optional(),
-    published: z.boolean().default(false),
+    published: z.boolean().default(false).optional(),
 })
 
 export const createUserSchema = z.object({

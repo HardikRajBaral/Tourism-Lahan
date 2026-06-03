@@ -35,4 +35,3 @@ export const verifyAccessToken = (token: string): TokenPayload => {
     return jwt.verify(token, requireSecret("JWT_SECRET")) as TokenPayload;
 };
 
-export const validateToken = ()

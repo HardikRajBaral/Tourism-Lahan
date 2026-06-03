@@ -41,12 +41,20 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET) as {
       userId: string;
     };
-
+    if(!decodedToken.userId){
+      logger.warn({
+        message: "User ID missing in token",
+        type: "auth",
+        ip: req.ip,
+      });
+      return res.status(401).json({ message: "Unauthorized" });
+    }
     req.userId = decodedToken.userId;
 
     next();
   } catch (err) {
     logger.error({
+      type: "auth",
       message: "Authentication error",
       error: err,
     });

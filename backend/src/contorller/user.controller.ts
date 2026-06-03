@@ -14,7 +14,11 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
     })
     const hassedPassword =await bycript.hash(password,13)
     if (existingUser){
-        logger.info("Attempt to register with existing email: " + email);
+        logger.warn({
+            type: "auth",
+            message: "Attempt to register with existing email: " + email,
+            ip: req.ip,
+        })
         res.status(400).json({
             message:"user already exists"
         })
@@ -49,7 +53,11 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
         accessToken,
     })
     }catch(err){
-        logger.error("Error creating user: ", err);
+        logger.error({
+            type: "auth",
+            message: "Error during user registration",
+            error: err,
+        });
         res.status(500).json({
             message:"internal server error"
         })
@@ -67,7 +75,11 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
         }
     })
     if(!user){
-        logger.info("Login attempt with non-existent email: " + email);
+        logger.warn({
+            type: "auth",
+            message: "Login attempt with non-existent email: " + email,
+            ip: req.ip,
+        });
         res.status(400).json({
             message:"invalid credentials"
         })
@@ -77,7 +89,12 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
     const isPasswordValid = await bycript.compare(password,user.password)
 
     if(!isPasswordValid){
-        logger.info("Invalid password attempt for email: " + email);
+        logger.warn({
+            type: "auth",
+            message: "Invalid password attempt for email: " + email,
+            ip: req.ip,
+        }
+    );
         res.status(400).json({
             message:"invalid credentials"
         })
