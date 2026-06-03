@@ -30,3 +30,9 @@ export const RefreshToken = (userId: string, email: string): string => {
 export const verifyRefreshToken = (token: string): TokenPayload => {
     return jwt.verify(token, requireSecret("REFRESH_TOKEN_SECRET")) as TokenPayload;
 };
+
+export const verifyAccessToken = (token: string): TokenPayload => {
+    return jwt.verify(token, requireSecret("JWT_SECRET")) as TokenPayload;
+};
+
+export const validateToken = ()
