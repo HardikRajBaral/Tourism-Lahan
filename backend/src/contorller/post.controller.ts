@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { type PostType } from "../../lib/validator";
 import { logger } from "../../lib/logger";
 import { prisma } from "../../lib/prisma";
-import type { PostDetail, PostListItem } from "../../Types/PostTypes";
+import type { Post } from "../../Types/PostTypes";
 
 export const createPost = async (
   req: Request,
@@ -43,8 +43,7 @@ export const updatePost = async (req: Request, res: Response) => {
   try {
     const userId = req.userId as string;
     const postId = req.params.id as string;
-    const { title, excerpt, content, published } =
-      req.body as Partial<PostType>;
+    const { title, excerpt, content, published } = req.body as Partial<PostType>;
 
     const post = await prisma.post.findUnique({
       where: {
@@ -111,7 +110,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
 export const listPost = async (req: Request, res: Response): Promise<void> => {
   try {
-    const post: PostListItem[] = await prisma.post.findMany({
+    const post: Partial<Post>[] = await prisma.post.findMany({
       where: {
         published: true,
       },
@@ -146,7 +145,7 @@ export const singlePost = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const post: PostDetail = await prisma.post.findFirstOrThrow({
+    const post: Partial<Post> = await prisma.post.findFirstOrThrow({
       where: {
         id: req.params.id as string,
       },
@@ -237,3 +236,31 @@ export const deletePost = async (req: Request, res: Response) => {
     });
   }
 };
+
+
+export const getAllPosts = async(req:Request,res:Response):Promise<void>=>{
+  try{
+    const userId = req.userId as string
+    const posts:Post[]  = await prisma.post.findMany({
+      where:{
+        authorId:userId
+      }
+    })
+    logger.info({
+      type: "post",
+      message: "User's posts fetched",
+      userId,
+      count: posts.length,
+    });
+    res.status(200).json(posts)
+  }catch(err){
+    logger.error({
+      type: "post",
+      message: "Error fetching user's posts",
+      error: err,
+    });
+    res.status(500).json({
+      message:"internal server error"
+    })
+  }
+}
