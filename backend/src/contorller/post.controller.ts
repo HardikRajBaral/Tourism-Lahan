@@ -193,6 +193,25 @@ export const singlePost = async (
 
 export const deletePost = async (req: Request, res: Response) => {
   try {
+    const useId =req.userId as string
+    const postId = req.params.id as string
+    const canDelete =await prisma.post.findFirst({
+      where:{
+        id:postId,
+        authorId:useId
+      }
+    })
+    if(!canDelete){
+      logger.warn({
+        type: "auth",
+        message: "Unauthorized delete attempt",
+        postId,
+        userId:useId,
+      });
+      return res.status(403).json({
+        message: "Forbidden: You are not the author of this post",
+      });
+    }
     const post = await prisma.post.delete({
       where: {
         id: req.params.id as string,
