@@ -1,9 +1,8 @@
 import type { Request, Response } from "express";
-import { createPostSchema, type PostType } from "../../lib/validator";
+import { type PostType } from "../../lib/validator";
 import { logger } from "../../lib/logger";
 import { prisma } from "../../lib/prisma";
-
-
+import type { PostDetail, PostListItem } from "../../Types/PostTypes";
 
 export const createPost = async (
   req: Request,
@@ -21,13 +20,17 @@ export const createPost = async (
         authorId,
       },
     });
+    logger.info({
+      type: "post",
+      message: "Post created",
+      postId: newPost.id,
+      authorId,
+    });
 
     res.status(201).json({
       message: "Post created successfully",
       post: newPost,
     });
-
-
   } catch (error) {
     logger.error("Error creating post: ", error);
     res.status(500).json({
@@ -36,43 +39,40 @@ export const createPost = async (
   }
 };
 
-
-
-
-
 export const updatePost = async (req: Request, res: Response) => {
-  try{
-    const userId= req.userId as string;
-    const postId= req.params.id as string
-    const { title, excerpt, content, published } = req.body as Partial<PostType>;
+  try {
+    const userId = req.userId as string;
+    const postId = req.params.id as string;
+    const { title, excerpt, content, published } =
+      req.body as Partial<PostType>;
 
-    const post =await  prisma.post.findUnique({
-      where:{
-        id: postId
-      }
-    })
-  
-    if(!post){
+    const post = await prisma.post.findUnique({
+      where: {
+        id: postId,
+      },
+    });
+
+    if (!post) {
       logger.warn({
-        type:"post",
-        message:"Post not found",
-        postId
-      })
+        type: "post",
+        message: "Post not found",
+        postId,
+      });
       return res.status(404).json({
-        message: "Post not found"
-      })
+        message: "Post not found",
+      });
     }
 
-    if (post?.authorId !== userId){
+    if (post?.authorId !== userId) {
       logger.warn({
-        type:"auth",
-        message:"Unauthorized update attempt",
+        type: "auth",
+        message: "Unauthorized update attempt",
         postId,
-        userId
-      })
+        userId,
+      });
       return res.status(403).json({
         message: "Forbidden: You are not the author of this post",
-      })
+      });
     }
 
     const updatedPost = await prisma.post.update({
@@ -80,22 +80,24 @@ export const updatePost = async (req: Request, res: Response) => {
         id: postId,
       },
       data: {
-       title: title?? post.title,
-       excerpt: excerpt ?? post.excerpt,
-       content: content ?? post.content,
-       published: published ?? post.published,
-       updatedAt: new Date(),
+        title: title ?? post.title,
+        excerpt: excerpt ?? post.excerpt,
+        content: content ?? post.content,
+        published: published ?? post.published,
+        updatedAt: new Date(),
       },
     });
-
+    logger.info({
+      type: "post",
+      message: "Post updated",
+      postId,
+      userId,
+    });
     return res.status(200).json({
       message: "Post updated successfully",
       post: updatedPost,
     });
-
-    
-
-  }catch (err){
+  } catch (err) {
     logger.error({
       type: "post",
       message: "Error updating post",
@@ -103,15 +105,116 @@ export const updatePost = async (req: Request, res: Response) => {
     });
     res.status(500).json({
       message: "internal server error",
-    })
+    });
   }
 };
-export const listPost = (req: Request, res: Response) => {
-  return true;
+
+export const listPost = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const post: PostListItem[] = await prisma.post.findMany({
+      where: {
+        published: true,
+      },
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        published: true,
+      },
+    });
+    logger.info({
+      type: "post",
+      message: "Posts fetched",
+      count: post.length,
+    });
+    res.status(200).json(post);
+    return;
+  } catch (error) {
+    logger.error({
+      type: "post",
+      message: "Error fetching posts",
+      error,
+    });
+    res.status(500).json({
+      message: "internal server error",
+    });
+  }
 };
-export const singlePost = (req: Request, res: Response) => {
-  return true;
+
+export const singlePost = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  try {
+    const post: PostDetail = await prisma.post.findFirstOrThrow({
+      where: {
+        id: req.params.id as string,
+      },
+      select: {
+        id: true,
+        title: true,
+        excerpt: true,
+        content: true,
+        published: true,
+        authorId: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!post) {
+      logger.warn({
+        type: "post",
+        message: "Post not found",
+        postId: req.params.id,
+      });
+       res.status(404).json({
+        message: "Post not found",
+      });
+      return
+    }
+    logger.info({
+      type: "post",
+      message: "Post fetched",
+      postId: req.params.id,
+    });
+    res.status(200).json(post);
+    return;
+  } catch (error) {
+    logger.error({
+      type: "post",
+      message: "Error fetching post",
+      error,
+    });
+    res.status(500).json({
+      message: "internal server error",
+    });
+  }
 };
-export const deletePost = (req: Request, res: Response) => {
-  return true;
+
+export const deletePost = async (req: Request, res: Response) => {
+  try {
+    const post = await prisma.post.delete({
+      where: {
+        id: req.params.id as string,
+      },
+    });
+    logger.info({
+      type: "post",
+      message: "Post deleted",
+      postId: req.params.id,
+    });
+    res.status(200).json({
+      message: "Post deleted successfully",
+      post,
+    });
+  } catch (error) {
+    logger.error({
+      type: "post",
+      message: "Error deleting post",
+      error,
+    });
+    res.status(500).json({
+      message: "internal server error",
+    });
+  }
 };

@@ -27,7 +27,6 @@ export const createUserSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.email().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
-  refreshToken: z.string().optional(),
 });
 
 export const loginUserSchema = z.object({
@@ -37,3 +36,5 @@ export const loginUserSchema = z.object({
 
 
 export type PostType = z.infer<typeof createPostSchema>;
+export type UserType = z.infer<typeof createUserSchema>;
+export type LoginType = z.infer<typeof loginUserSchema>;
