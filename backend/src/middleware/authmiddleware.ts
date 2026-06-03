@@ -48,6 +48,7 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
       message: "Authentication error",
       error: err,
     });
+    return res.status(401).json({ message: "Token expired or invalid" });
   }
 };
 
