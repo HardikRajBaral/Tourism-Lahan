@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { type PostType } from "../../lib/validator";
 import { logger } from "../../lib/logger";
 import { prisma } from "../../lib/prisma";
-import type { Post } from "../../Types/PostTypes";
+import type { Post,PostDetail ,PostListItem} from "../../Types/PostTypes";
 
 export const createPost = async (
   req: Request,
@@ -110,7 +110,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
 export const listPost = async (req: Request, res: Response): Promise<void> => {
   try {
-    const post: Partial<Post>[] = await prisma.post.findMany({
+    const post: PostListItem[]= await prisma.post.findMany({
       where: {
         published: true,
       },
@@ -145,7 +145,7 @@ export const singlePost = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const post: Partial<Post> = await prisma.post.findFirstOrThrow({
+    const post: PostDetail = await prisma.post.findFirstOrThrow({
       where: {
         id: req.params.id as string,
       },

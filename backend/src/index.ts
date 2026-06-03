@@ -18,7 +18,7 @@ app.use('/api/v1/users',userRouter)
 const startServer= async()=>{
   connectRedis();
   app.listen(PORT,() => {
-  logger.info(`Server running on http://localhost:${PORT}`);
+  logger.info(`Server running on [  http://localhost:${PORT}  ]`);
 });
 
 }
