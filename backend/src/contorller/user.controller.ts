@@ -68,18 +68,20 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
 }
 
 export const loginUser= async(req:Request,res:Response):Promise<void>=>{
-    const {email,password}=req.body
+    const {identifier,password}=req.body
 
    try{
      const user =await prisma.user.findFirst({
         where:{
-            email
+            OR:[
+                {email:identifier},
+                {name:identifier}]
         }
     })
     if(!user){
         logger.warn({
             type: "auth",
-            message: "Login attempt with non-existent email: " + email,
+            message: "Login attempt with non-existent identifier: " + identifier,
             ip: req.ip,
         });
         res.status(400).json({
@@ -93,7 +95,7 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
     if(!isPasswordValid){
         logger.warn({
             type: "auth",
-            message: "Invalid password attempt for email: " + email,
+            message: "Invalid password attempt for identifier: " + identifier,
             ip: req.ip,
         }
     );
@@ -104,7 +106,7 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
     }
     
    
-    const accessToken = AccessToken(user.id,email)
+    const accessToken = AccessToken(user.id,user.email)
 
 
     res.cookie("accessToken",accessToken,{
@@ -114,7 +116,7 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
         maxAge:15*60*1000
     })
 
-    const refreshToken = RefreshToken(user.id,email)
+    const refreshToken = RefreshToken(user.id,user.email)
     await prisma.token.update({
         where:{
             userId:user.id
