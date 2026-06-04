@@ -3,6 +3,7 @@ import { authLimiter } from "../../lib/limiter";
 import { createUser, loginUser,logoutUser } from "../contorller/user.controller";
 import { validationMiddleware } from "../middleware/validationMiddleware";
 import { createUserSchema, loginUserSchema } from "../../lib/validator";
+import authenticate from "../middleware/authmiddleware";
 
 
 const router= express.Router()
@@ -11,6 +12,6 @@ router.use(authLimiter)
 
 router.post("/register", validationMiddleware(createUserSchema), createUser)
 router.post("/login", validationMiddleware(loginUserSchema), loginUser)
-router.post("/logout", logoutUser)
+router.post("/logout", authenticate, logoutUser)
 
 export default router

@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { prisma } from "../../lib/prisma";
 import { logger } from "../../lib/logger";
 import bycript from "bcrypt";
-import { AccessToken, RefreshToken,verifyAccessToken } from "../../lib/generateToken";
+import { AccessToken, RefreshToken } from "../../lib/generateToken";
 
 export const createUser= async(req:Request,res:Response):Promise<void>=>{
     const {email,name,password}= req.body
@@ -12,7 +12,7 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
             email
         }
     })
-    const hassedPassword =await bycript.hash(password,13)
+    
     if (existingUser){
         logger.warn({
             type: "auth",
@@ -25,6 +25,7 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
         return
     }
     try{
+    const hassedPassword = await bycript.hash(password,13)
            
     const user = await prisma.user.create({
         data:{
@@ -35,7 +36,8 @@ export const createUser= async(req:Request,res:Response):Promise<void>=>{
     })
     
     const refreshToken= RefreshToken(user.id,email)
-    const accessToken= RefreshToken(user.id,email)
+    const accessToken= AccessToken(user.id,email)
+    
     await prisma.token.create({
         data:{
             token:refreshToken,
@@ -147,7 +149,11 @@ export const logoutUser = async(req:Request,res:Response):Promise<void>=>{
         }
     })
    }
-   res.clearCookie("accessToken")
+   res.clearCookie("accessToken",{
+    httpOnly:true,
+    secure:process.env.NODE_ENV === "production",
+    sameSite:"strict",
+   })
     res.status(200).json({
      message:"Logged out successfully"
     })

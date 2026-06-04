@@ -159,9 +159,10 @@ export const singlePost = async (
   res: Response,
 ): Promise<void> => {
   try {
-    const post: PostDetail = await prisma.post.findFirstOrThrow({
+    const post: PostDetail | null = await prisma.post.findFirst({
       where: {
         id: req.params.id as string,
+        published: true,
       },
       select: {
         id: true,

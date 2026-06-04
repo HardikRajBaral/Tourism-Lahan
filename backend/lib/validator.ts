@@ -8,11 +8,10 @@ export const createPostSchema = z.object({
     .min(1, "Excerpt is required")
     .max(255, "Excerpt must be less than 255 characters"),
   content: z.string().min(1, "Content is required"),
-  published:z.boolean().default(false),
-  authorId: z.string().min(1, "Author ID is required"),
+  published: z.boolean().default(false),
 });
 
-export const updatePostSchema =z.object({
+export const updatePostSchema = z.object({
     title: z.string().min(1, "Title is required").optional(),
     excerpt: z
       .string()
