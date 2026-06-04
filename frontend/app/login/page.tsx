@@ -38,6 +38,15 @@ export default function LoginPage() {
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold">Login </h1>
           <p className="text-gray-600">Welcome to the the site .</p>
+          {error && (
+            <div
+              role="alert"
+              aria-live="assertive"
+              className="mt-4 text-sm text-red-700 bg-red-50 border border-red-100 rounded p-2"
+            >
+              {error}
+            </div>
+          )}
         </div>
         <div className="mb-4">
           <form onSubmit={handleSubmit(handleLogin)} className="space-y-4 ">
