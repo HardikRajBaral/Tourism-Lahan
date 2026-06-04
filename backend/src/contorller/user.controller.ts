@@ -84,7 +84,7 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
             message: "Login attempt with non-existent identifier: " + identifier,
             ip: req.ip,
         });
-        res.status(400).json({
+        res.status(401).json({
             message:"invalid credentials"
         })
         return
@@ -99,7 +99,7 @@ export const loginUser= async(req:Request,res:Response):Promise<void>=>{
             ip: req.ip,
         }
     );
-        res.status(400).json({
+        res.status(401).json({
             message:"invalid credentials"
         })
         return
