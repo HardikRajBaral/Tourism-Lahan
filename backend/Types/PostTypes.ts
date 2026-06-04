@@ -18,7 +18,7 @@ export type PostDetail = {
 };
 
 export type Post={
-   id: string;
+  id: string;
   title: string;
   excerpt: string;
   content: string;

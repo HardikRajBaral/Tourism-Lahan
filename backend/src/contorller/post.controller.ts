@@ -3,6 +3,7 @@ import { type PostType } from "../../lib/validator";
 import { logger } from "../../lib/logger";
 import { prisma } from "../../lib/prisma";
 import type { Post, PostDetail, PostListItem } from "../../Types/PostTypes";
+import type { SortField, SortOrder } from "../../Types/FilterTypes";
 
 export const createPost = async (
   req: Request,
@@ -112,8 +113,8 @@ export const updatePost = async (req: Request, res: Response) => {
 export const listPost = async (req: Request, res: Response): Promise<void> => {
   try {
     const search = req.query.search as string | undefined;
-    const sort = req.query.sort as string | "updatedAt";
-    const order = req.query.order as string | "desc";
+    const sort = req.query.sort as SortField | "updatedAt";
+    const order = req.query.order as SortOrder | "desc";
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 4;
 
