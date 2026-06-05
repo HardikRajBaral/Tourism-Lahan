@@ -6,15 +6,14 @@ import CreatePost from "@/components/CreatePost";
 import { useState } from "react";
 import Posts from "@/components/Posts";
 import Dashboard from "@/components/Dashboard";
-
-type NavItems = "dashboard" | "posts" | "create-post";
+import { NavItems } from "../types/type";
 
 export default function DashboardPage() {
   const [active, setActive] = useState<NavItems>("dashboard");
   const pages: Record<NavItems, React.ReactNode> = {
     dashboard: <Dashboard />,
-    posts: <Posts />,
-    "create-post": <CreatePost />,
+    posts: <Posts onNavigate={setActive} />,
+    createPost: <CreatePost />,
   };
 
   return (
@@ -60,9 +59,9 @@ export default function DashboardPage() {
               Posts
             </button>
             <button
-              onClick={() => setActive("create-post")}
+              onClick={() => setActive("createPost")}
               className={`w-full text-left px-3 py-2 rounded transition
-                ${active === "create-post"
+                ${active === "createPost"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-100 text-gray-700"
                 }`}
