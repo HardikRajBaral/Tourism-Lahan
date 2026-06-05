@@ -1,19 +1,81 @@
-import Image from "next/image";
+"use client";
 
-export default function DashboardPage(){
-    return(
-        <div className="min-h-screen  flex  bg-gray-100">
-            <div > 
-                <div className="flex items-center justify-center  gap-4">
-                    <div>
-                        <Image src="/images/logo-removebg-preview.png" alt="logo" width={64} height={64} />
-                    </div>
-                    <div>
-                        <h1>DashBoard</h1>
-                        <p>Welcome to the dashboard page.</p>
-                    </div>
-                </div>
+import Image from "next/image";
+import DashBoardContent from "@/components/DashBoarDContent";
+import CreatePost from "@/components/CreatePost";
+import { useState } from "react";
+import Posts from "@/components/Posts";
+import Dashboard from "@/components/Dashboard";
+
+type NavItems = "dashboard" | "posts" | "create-post";
+
+export default function DashboardPage() {
+  const [active, setActive] = useState<NavItems>("dashboard");
+  const pages: Record<NavItems, React.ReactNode> = {
+    dashboard: <Dashboard />,
+    posts: <Posts />,
+    "create-post": <CreatePost />,
+  };
+
+  return (
+    <div className="min-h-screen flex bg-grey-100">
+      <div className="flex w-full">
+        <aside className="flex flex-col items-start w-64 justify-start p-6 bg-blue-50 border-r">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="shrink-0">
+              <Image
+                src="/images/logo-removebg-preview.png"
+                alt="logo"
+                width={48}
+                height={48}
+              />
             </div>
-        </div>
-    )
+
+            <div>
+              <h1 className="text-xl font-bold">DashBoard</h1>
+              <p className="text-xs text-gray-600">dashboard page.</p>
+            </div>
+          </div>
+
+          <nav className="w-full space-y-2">
+            <button
+              onClick={() => setActive("dashboard")}
+              className={`w-full text-left px-3 py-2 rounded transition
+                ${active === "dashboard"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-100 text-gray-700"
+                }`}
+
+            >
+              Dashboard
+            </button>
+            <button
+              onClick={() => setActive("posts")}
+                    className={`w-full text-left px-3 py-2 rounded transition
+                      ${active === "posts"
+                        ? "bg-blue-500 text-white"
+                        : "hover:bg-gray-100 text-gray-700"
+                      }`}
+                    >
+              Posts
+            </button>
+            <button
+              onClick={() => setActive("create-post")}
+              className={`w-full text-left px-3 py-2 rounded transition
+                ${active === "create-post"
+                  ? "bg-blue-500 text-white"
+                  : "hover:bg-gray-100 text-gray-700"
+                }`}
+            >
+              Create Post
+            </button>
+          </nav>
+        </aside>
+
+        <main className="flex-1 p-6">
+          <DashBoardContent>{pages[active]}</DashBoardContent>
+        </main>
+      </div>
+    </div>
+  );
 }
