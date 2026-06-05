@@ -1,10 +1,10 @@
-import { NavItems } from "@/app/types/type";
+import {  PostProps } from "@/app/types/type";
 import { CirclePlus, Search, ChevronDown } from "lucide-react";
+import Table from "./table";
 
-type Props = {
-  onNavigate: (page: NavItems) => void;
-};
-export default function Posts({ onNavigate }: Props) {
+
+
+export default function Posts({ onNavigate }: PostProps) {
   return (
     <main className="p-6 w-full">
       <div className="flex justify-between items-center m-4">
@@ -52,6 +52,12 @@ export default function Posts({ onNavigate }: Props) {
           </div>
         </div>
       </div>
+
+
+      {/*post table*/}
+      <section>
+        <Table />
+      </section>
     </main>
   );
 }
