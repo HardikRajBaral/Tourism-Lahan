@@ -33,7 +33,7 @@ export default function Posts({ onNavigate }: PostProps) {
             <div className="border border-gray-300 rounded-xl flex items-center px-2 w-full">
               <input className="w-full py-2 px-3 outline-none" type="text" placeholder="Search posts..." />
               <button className="p-2 text-gray-600">
-                <Search size={20} />
+                <Search size={20} className="text-gray-600 border-l border-gray-300 w-full pl-4" />
               </button>
             </div>
           </div>

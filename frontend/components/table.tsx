@@ -105,7 +105,7 @@ export default function Table() {
                 </div>
               </td>
               <td className="p-2 block text-center md:table-cell md:text-center">
-                <span className={`inline-flex px-4 py-2 font-semibold  ${post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} rounded-lg border border-gray-300 text-xs`}>
+                <span className={`inline-flex px-4 py-2 font-semibold  ${post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} rounded-full border border-gray-300 text-xs`}>
                   {post.published ? "published" : "draft"}
                 </span>
               </td>

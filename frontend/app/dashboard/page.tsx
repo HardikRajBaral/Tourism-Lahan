@@ -19,8 +19,8 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex bg-grey-100">
       <div className="flex w-full">
-        <aside className="flex flex-col items-start w-64 justify-start p-6 bg-blue-50 border-r">
-          <div className="flex items-center gap-3 mb-6">
+        <aside className="flex flex-col items-start w-64 justify-start bg-blue-50 border-r border-gray-300">
+          <div className="flex items-center gap-3 p-6 mb-6 border-b border-gray-300 w-full">
             <div className="shrink-0">
               <Image
                 src="/images/logo-removebg-preview.png"
@@ -39,7 +39,7 @@ export default function DashboardPage() {
           <nav className="w-full space-y-2">
             <button
               onClick={() => setActive("dashboard")}
-              className={`w-full text-left px-3 py-2 rounded-lg transition
+              className={`w-full text-left px-4 py-2  transition
                 ${active === "dashboard"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-100 text-gray-700"
@@ -50,7 +50,7 @@ export default function DashboardPage() {
             </button>
             <button
               onClick={() => setActive("posts")}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition
+                    className={`w-full text-left px-4 py-2  transition
                       ${active === "posts"
                         ? "bg-blue-500 text-white"
                         : "hover:bg-gray-100 text-gray-700"
@@ -60,7 +60,7 @@ export default function DashboardPage() {
             </button>
             <button
               onClick={() => setActive("createPost")}
-              className={`w-full text-left px-3 py-2 rounded-lg transition
+              className={`w-full text-left px-4 py-2  transition
                 ${active === "createPost"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-100 text-gray-700"
