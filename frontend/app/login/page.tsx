@@ -34,7 +34,7 @@ export default function LoginPage() {
   });
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold">Login </h1>
           <p className="text-gray-600">Welcome to the the site .</p>
@@ -42,7 +42,7 @@ export default function LoginPage() {
             <div
               role="alert"
               aria-live="assertive"
-              className="mt-4 text-sm text-red-700 bg-red-50 border border-red-100 rounded p-2"
+              className="mt-4 text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg p-2"
             >
               {error}
             </div>
@@ -59,7 +59,7 @@ export default function LoginPage() {
                 Email or Username
               </label>
               <input
-                className="mt-2 p-2 border border-gray-400 rounded-md bg-gray-100 w-full :hover:border-gray-500 focus:outline-none focus:ring-2  focus:border-transparent"
+                className="mt-2 p-2 border border-gray-400 rounded-lg bg-gray-100 w-full :hover:border-gray-500 focus:outline-none focus:ring-2  focus:border-transparent"
                 type="text"
                 id="identifier"
                 {...register("identifier")}

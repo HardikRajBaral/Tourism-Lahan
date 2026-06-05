@@ -39,7 +39,7 @@ export default function DashboardPage() {
           <nav className="w-full space-y-2">
             <button
               onClick={() => setActive("dashboard")}
-              className={`w-full text-left px-3 py-2 rounded transition
+              className={`w-full text-left px-3 py-2 rounded-lg transition
                 ${active === "dashboard"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-100 text-gray-700"
@@ -50,7 +50,7 @@ export default function DashboardPage() {
             </button>
             <button
               onClick={() => setActive("posts")}
-                    className={`w-full text-left px-3 py-2 rounded transition
+                    className={`w-full text-left px-3 py-2 rounded-lg transition
                       ${active === "posts"
                         ? "bg-blue-500 text-white"
                         : "hover:bg-gray-100 text-gray-700"
@@ -60,7 +60,7 @@ export default function DashboardPage() {
             </button>
             <button
               onClick={() => setActive("createPost")}
-              className={`w-full text-left px-3 py-2 rounded transition
+              className={`w-full text-left px-3 py-2 rounded-lg transition
                 ${active === "createPost"
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-100 text-gray-700"
