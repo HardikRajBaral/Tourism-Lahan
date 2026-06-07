@@ -30,7 +30,8 @@ export default function CreatePost() {
 
   const handlePost = async (data: PostSchema, published: boolean) => {
     setError(null);
-    const formData = new FormData();
+   try{
+     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("excerpt", data.excerpt);
     formData.append("content", data.content);
@@ -39,8 +40,26 @@ export default function CreatePost() {
     const imageFile = (document.getElementById("image") as HTMLInputElement)
       .files?.[0];
     if (imageFile) formData.append("image", imageFile);
-    toast.success(published ? "Post published!" : "Draft saved!"); // ← success toast
+    
+    const res= await fetch("/api/v1/posts",{
+      method:"POST",
+      body:formData,
+      credentials:"include"
+    })
+    const responseData = await res.json();
+    if(!res.ok) {
+      const message =responseData.message || "Failed to create post";
+      setError(message);
+      toast.error(message);
+      return;
+    }
+    toast.success(published ? "Post published!" : "Draft saved!");
     reset();
+
+   }catch{
+    setError("Failed to create post. Please try again.");
+    toast.error("Failed to create post. Please try again.")
+   }
   };
 
   return (

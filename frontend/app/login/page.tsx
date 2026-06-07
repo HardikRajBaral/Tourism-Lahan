@@ -13,22 +13,32 @@ export default function LoginPage() {
 
   const handleLogin = async (data: FormSchema) => {
     setError(null);
-    const res = await fetch("/api/v1/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-      credentials: "include",
-    });
-    const responseData = await res.json();
-    if (!res.ok) {
-      setError(responseData.message || "Login failed");
-      toast.error(responseData.message || "Login failed");
+    try {
+      const res = await fetch("/api/v1/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const responseData = await res.json();
+
+      if (!res.ok) {
+        const message = responseData.message || "Login failed";
+        setError(message);
+        toast.error(message);
+        return;
+      }
+
+      reset();
+      toast.success("Logged in successfully!");
+      router.push("/dashboard");
+    } catch {
+      setError("Unable to login. Please try again.");
+      toast.error("Unable to login. Please try again.");
     }
-    reset();
-    toast.success("Logged in successfully!");
-    router.push("/dashboard");
 
   };
   const {
