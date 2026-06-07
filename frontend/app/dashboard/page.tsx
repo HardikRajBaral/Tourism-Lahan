@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import DashBoardContent from "@/components/DashBoarDContent";
+import DashBoardContent from "@/components/DashboardWrapper";
 import CreatePost from "@/components/CreatePost";
 import { useState } from "react";
 import Posts from "@/components/Posts";
@@ -17,7 +17,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen flex bg-grey-100">
+    <div className="min-h-screen flex bg-gray-100">
       <div className="flex w-full">
         <aside className="flex flex-col items-start w-64 justify-start bg-blue-50 border-r border-gray-300">
           <div className="flex items-center gap-3 p-6 mb-6 border-b border-gray-300 w-full">

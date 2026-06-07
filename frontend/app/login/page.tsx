@@ -4,9 +4,12 @@ import { FormSchema, formSchema } from "@/utils/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import {useRouter} from "next/navigation";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleLogin = async (data: FormSchema) => {
     setError(null);
@@ -21,8 +24,12 @@ export default function LoginPage() {
     const responseData = await res.json();
     if (!res.ok) {
       setError(responseData.message || "Login failed");
+      toast.error(responseData.message || "Login failed");
     }
     reset();
+    toast.success("Logged in successfully!");
+    router.push("/dashboard");
+
   };
   const {
     register,
@@ -96,33 +103,7 @@ export default function LoginPage() {
                   bg-blue-600 text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 
                   disabled:opacity-50 disabled:cursor-not-allowed active:translate-y-0.5`}
               >
-                {isSubmitting ? (
-                  <>
-                    <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                      ></path>
-                    </svg>
-                    Logging in...
-                  </>
-                ) : (
-                  "Login"
-                )}
+                {isSubmitting ? "Logging in..." : "Login"}
               </button>
             </div>
           </form>
