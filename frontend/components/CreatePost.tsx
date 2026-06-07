@@ -55,6 +55,7 @@ export default function CreatePost() {
     }
     toast.success(published ? "Post published!" : "Draft saved!");
     reset();
+    setPreview(null);
 
    }catch{
     setError("Failed to create post. Please try again.");
