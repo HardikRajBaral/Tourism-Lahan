@@ -4,7 +4,7 @@ const links = ["Home", "Places", "About Us", "Contact"];
 
 export const Navbar = () => {
   return (
-    <nav className="w-full shadow-md">
+    <nav className="w-full shadow-md z-50">
       <div className="relative h-36 w-full">
         <Image
           src="/images/mountain-banner-bg.jpg"
