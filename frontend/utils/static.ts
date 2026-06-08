@@ -1,4 +1,4 @@
-import { CardPost } from "@/app/types/type";
+import { CardPost } from "@/types/type";
 
 export const dummyTourismPosts: CardPost[] = [
   {

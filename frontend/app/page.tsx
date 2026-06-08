@@ -1,14 +1,13 @@
-import { Navbar } from "@/components/navbar";
-import Image from "next/image";
+import PlanYourTrip from "@/components/planYourTrip";
 import { dummyTourismPosts } from "@/utils/static";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import PlanYourTrip from "@/components/planYourTrip";
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden">
-      <Navbar />
+     
       <div className="relative h-[75vh]  overflow-hidden ">
         <Image
           src="/images/images.jpeg"

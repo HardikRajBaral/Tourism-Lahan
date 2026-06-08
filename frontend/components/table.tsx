@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/app/types/type";
+import { Post } from "@/types/type";
 import { Eye, Pencil, Trash2, Ellipsis } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -91,7 +91,7 @@ export default function Table() {
                 <div className="flex items-center justify-start gap-4 mx-4 my-4">
                   <div className="w-16 h-16  rounded overflow-hidden">
                     <Image
-                    className="object-cover w-full h-full"
+                      className="object-cover w-full h-full"
                       src={post.image}
                       alt={post.title}
                       width={64}
@@ -105,7 +105,9 @@ export default function Table() {
                 </div>
               </td>
               <td className="p-2 block text-center md:table-cell md:text-center">
-                <span className={`inline-flex px-4 py-2 font-semibold  ${post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'} rounded-full border border-gray-300 text-xs`}>
+                <span
+                  className={`inline-flex px-4 py-2 font-semibold  ${post.published ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"} rounded-full border border-gray-300 text-xs`}
+                >
                   {post.published ? "published" : "draft"}
                 </span>
               </td>
@@ -120,9 +122,7 @@ export default function Table() {
                     <Ellipsis size={20} />
                   </button>
                   {activeMenu === post.id && (
-                    <div
-                      className="z-50 absolute right-0 top-full mt-1 w-48 -translate-x-1/7 rounded-2xl bg-white shadow-lg border border-gray-200"
-                    >
+                    <div className="z-50 absolute right-0 top-full mt-1 w-48 -translate-x-1/7 rounded-2xl bg-white shadow-lg border border-gray-200">
                       <div className="flex flex-col p-2">
                         <button className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100">
                           <Eye size={16} />

@@ -1,8 +1,6 @@
-import {  PostProps } from "@/app/types/type";
+import { PostProps } from "@/types/type";
 import { CirclePlus, Search, ChevronDown } from "lucide-react";
 import Table from "./table";
-
-
 
 export default function Posts({ onNavigate }: PostProps) {
   return (
@@ -31,9 +29,16 @@ export default function Posts({ onNavigate }: PostProps) {
           {/*search bar*/}
           <div className="flex items-center gap-2 flex-1">
             <div className="border border-gray-300 rounded-xl flex items-center px-2 w-full">
-              <input className="w-full py-2 px-3 outline-none" type="text" placeholder="Search posts..." />
+              <input
+                className="w-full py-2 px-3 outline-none"
+                type="text"
+                placeholder="Search posts..."
+              />
               <button className="p-2 text-gray-600">
-                <Search size={20} className="text-gray-600 border-l border-gray-300 w-full pl-4" />
+                <Search
+                  size={20}
+                  className="text-gray-600 border-l border-gray-300 w-full pl-4"
+                />
               </button>
             </div>
           </div>
@@ -45,14 +50,19 @@ export default function Posts({ onNavigate }: PostProps) {
               <ChevronDown size={20} />
             </button>
             <div className="absolute left-0 top-full mt-2 w-36 bg-white text-black rounded shadow-lg border border-gray-200 opacity-0 pointer-events-none transform scale-95 origin-top-right transition-all duration-150 z-50 group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto">
-              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">All Posts</button>
-              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Published</button>
-              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">Drafts</button>
+              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                All Posts
+              </button>
+              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                Published
+              </button>
+              <button className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                Drafts
+              </button>
             </div>
           </div>
         </div>
       </div>
-
 
       {/*post table*/}
       <section>

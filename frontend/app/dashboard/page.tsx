@@ -6,7 +6,7 @@ import CreatePost from "@/components/CreatePost";
 import { useState } from "react";
 import Posts from "@/components/Posts";
 import Dashboard from "@/components/Dashboard";
-import { NavItems } from "../types/type";
+import { NavItems } from "../../types/type";
 
 export default function DashboardPage() {
   const [active, setActive] = useState<NavItems>("dashboard");
@@ -40,30 +40,32 @@ export default function DashboardPage() {
             <button
               onClick={() => setActive("dashboard")}
               className={`w-full text-left px-4 py-2  transition
-                ${active === "dashboard"
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-100 text-gray-700"
+                ${
+                  active === "dashboard"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-100 text-gray-700"
                 }`}
-
             >
               Dashboard
             </button>
             <button
               onClick={() => setActive("posts")}
-                    className={`w-full text-left px-4 py-2  transition
-                      ${active === "posts"
-                        ? "bg-blue-500 text-white"
-                        : "hover:bg-gray-100 text-gray-700"
+              className={`w-full text-left px-4 py-2  transition
+                      ${
+                        active === "posts"
+                          ? "bg-blue-500 text-white"
+                          : "hover:bg-gray-100 text-gray-700"
                       }`}
-                    >
+            >
               Posts
             </button>
             <button
               onClick={() => setActive("createPost")}
               className={`w-full text-left px-4 py-2  transition
-                ${active === "createPost"
-                  ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-100 text-gray-700"
+                ${
+                  active === "createPost"
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-100 text-gray-700"
                 }`}
             >
               Create Post

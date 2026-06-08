@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const links = ["Home", "Places", "About Us", "Contact"];
+const links = ["Home", "Places", "About Us","Plan Your Trip", "Contact"];
 
 export const Navbar = () => {
   return (
