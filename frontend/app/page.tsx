@@ -3,12 +3,13 @@ import { dummyTourismPosts } from "@/utils/static";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Contact } from "@/components/contact";
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden">
      
-      <div className="relative h-[75vh]  overflow-hidden ">
+      <div id="home" className="relative h-[75vh]  overflow-hidden ">
         <Image
           src="/images/images.jpeg"
           alt="Next.js logo"
@@ -18,14 +19,14 @@ export default function Home() {
         />
       </div>
       <div className="w-full flex flex-col items-center justify-center">
-        <div className="bg-white p-6 min-h-[25vh] w-full  md:w-3/4 lg:w-1/2 rounded-lg shadow-md mt-6">
+        <div id="about" className="bg-white p-6 min-h-[25vh] w-full  md:w-3/4 lg:w-1/2 rounded-lg shadow-md mt-6">
           <h1 className="text-5xl m-2 font-serif font-bold text-center hover:underline-offset-4 hover:decoration-1 hover:underline text-gray-800 block">
             Discover Lahan
           </h1>
-          <span className="text-md text-gray-600 text-center block">
+          <span className="text-md text-gray-600 text-center block mb-10">
             The Gateway to Mithila Culture & Natural Wonders
           </span>
-          <p className="text-gray-700 mt-4 text-justify text-lg">
+          <p className="text-gray-700 text-justify text-lg">
             Welcome to Lahan, the vibrant heart of the Siraha district in
             Madhesh Province. Strategically located along the bustling East-West
             Mahendra Highway, Lahan is much more than a major commercial hub—it
@@ -37,16 +38,16 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="w-full flex flex-col items-center justify-center mt-6">
+        <div id="places" className="w-full flex flex-col items-center justify-center mt-6">
           <div className="bg-white p-6 min-h-[25vh] w-full  md:w-3/4 lg:w-1/2 rounded-lg shadow-md">
             <h1 className="text-4xl m-2 font-serif font-bold text-center text-gray-800 block">
               Why Visit Lahan?
             </h1>
-            <span className="text-md text-gray-600 text-center block">
+            <span className="text-md text-gray-600 text-center block mb-12">
               Experience the rich cultural heritage and natural beauty of Lahan
             </span>
 
-            <div className="mt-6 space-y-6 w-full ">
+            <div className="space-y-6 w-full ">
               {dummyTourismPosts.map((post) => (
                 <div
                   key={post.id}
@@ -87,6 +88,7 @@ export default function Home() {
         </div>
       </div>
       <PlanYourTrip />
+      <Contact />
     </main>
   );
 }

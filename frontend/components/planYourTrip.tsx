@@ -80,18 +80,18 @@ function ChipGroup({ title, items }: { title: string; items: string[] }) {
 
 export default function PlanYourTrip() {
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-6 pb-10">
+    <div id="plan-your-trip" className="w-full flex flex-col items-center justify-center mt-6 pb-10">
       <div className="bg-white p-6 w-full md:w-3/4 lg:w-1/2 rounded-lg shadow-md">
         {/* Section header — matches "Why Visit Lahan?" pattern */}
         <h1 className="text-4xl m-2 font-serif font-bold text-center text-gray-800 block">
           Plan Your Trip
         </h1>
-        <span className="text-md text-gray-600 text-center block">
+        <span className="text-md text-gray-600 text-center block mb-12">
           Everything you need to know before you go
         </span>
 
         {/* Two-column grid */}
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Left — Travel Matrix */}
           <div className="border border-gray-200 rounded-2xl overflow-hidden">
             <div className="px-4 py-3 border-b border-gray-100">
