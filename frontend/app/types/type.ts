@@ -14,3 +14,13 @@ export type Post = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+
+export type CardPost = {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  image: string;        
+  updatedAt: Date;
+};
