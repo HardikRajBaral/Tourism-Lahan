@@ -58,13 +58,13 @@ export const Footer = () => {
           </h3>
           <ul className="space-y-4">
             <li>
-              <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Home</Link>
+              <Link href="#home" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Home</Link>
             </li>
             <li>
-              <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Places to Visit</Link>
+              <Link href="#places" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Places to Visit</Link>
             </li>
             <li>
-              <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">About Lahan</Link>
+              <Link href="#about" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">About Lahan</Link>
             </li>
             <li>
               <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Photo Gallery</Link>
@@ -94,7 +94,7 @@ export const Footer = () => {
               <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Rules & Regulations</Link>
             </li>
             <li>
-              <Link href="#" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Contact Us</Link>
+              <Link href="#contact" className="text-sm hover:text-blue-400 hover:translate-x-2 inline-block transition-all duration-200">Contact Us</Link>
             </li>
           </ul>
         </div>
