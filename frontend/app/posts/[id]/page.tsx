@@ -20,7 +20,7 @@ export default async function PostPage({
 
   return (
     <main className="min-h-screen overflow-hidden bg-gray-50 pb-20">
-      <Navbar />
+   
       
       <div className="relative h-[75vh] w-full overflow-hidden">
         <Image

@@ -49,39 +49,36 @@ export default function Home() {
 
             <div className="space-y-6 w-full ">
               {dummyTourismPosts.map((post) => (
-                <div
+                <Link
                   key={post.id}
-                  className="flex flex-col md:flex-row rounded-2xl gap-4 border-b pb-4"
+                  href={`/posts/${post.id}`}
+                  className="flex flex-col md:flex-row rounded-2xl gap-6 border-b pb-6 mb-2 group hover:bg-gray-50 transition-all p-4 -mx-4 cursor-pointer"
                 >
-                  <div className="  min-w-2/5 shrink-0 h-48 relative">
+                  <div className="md:w-2/5 shrink-0 h-48 relative overflow-hidden rounded-2xl">
                     <Image
                       src={post.image}
                       alt={post.title}
-                      width={100}
-                      height={100}
-                      className="object-cover rounded-2xl w-full h-full"
+                      fill
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="w-full flex flex-col justify-between">
-                    <div className="my-4">
-                      <h2 className="text-xl font-bold text-gray-800">
+                  <div className="w-full flex flex-col justify-between py-2">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors">
                         {post.title}
                       </h2>
-                      <p className="text-gray-600 mt-2 text-md">{post.excerpt}</p>
+                      <p className="text-gray-600 mt-3 text-md leading-relaxed">{post.excerpt}</p>
                     </div>
-                    <div className="flex items-center justify-between mb-4">
-                      <p className="text-gray-700 p-1 rounded-lg text-sm italic bg-gray-100 ">
+                    <div className="flex items-center justify-between mt-4">
+                      <p className="text-gray-500 px-3 py-1 rounded-md text-sm font-medium bg-gray-100">
                         {post.updatedAt.toDateString()}
                       </p>
-                      <Link
-                        href={`/posts/${post.id}`}
-                        className="text-blue-500 transition-transform duration-200 flex items-center gap-1 hover:-translate-y-1"
-                      >
-                        Read More <ArrowRight size={16} />
-                      </Link>
+                      <span className="text-blue-600 font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
+                        Read More <ArrowRight size={18} />
+                      </span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
