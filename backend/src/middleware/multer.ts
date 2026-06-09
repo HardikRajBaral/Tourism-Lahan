@@ -1,5 +1,4 @@
 import multer from "multer";
-import cloudinary from "../config/cloudinary";
 import { logger } from "../lib/logger";
 
 const upload = multer({

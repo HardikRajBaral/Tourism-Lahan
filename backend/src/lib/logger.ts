@@ -60,5 +60,10 @@ export const logger = winston.createLogger({
       format: combine(filterLogs("auth"), FileFormat),
       level: "warn",
     }),
+    new winston.transports.File({
+      filename: path.join(logDir, "uploader.log"),
+      format: combine(filterLogs("uploader"), FileFormat),
+      level: "error",
+    }),
   ],
 });

@@ -1,43 +1,42 @@
 import type { Request, Response } from "express";
 import { type PostType } from "../lib/validator";
 import { logger } from "../lib/logger";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../config/prisma";
 import type { Post, PostDetail, PostListItem } from "../Types/PostTypes";
 import type { SortField, SortOrder } from "../Types/FilterTypes";
-import cloudinary from "../config/cloudinary";
+
 import path from "path";
 import imageUploader from "../lib/uploader";
-
 
 export const createPost = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
-      if(!req.file){
-       res.status(400).json({
+    if (!req.file) {
+      res.status(400).json({
         message: "image is required",
       });
-      return
+      return;
     }
-    const {name}=path.parse(req.file.originalname)
-    const fileBuffer=req.file.buffer
-    const fileType=req.file.mimetype
-    const uploader= await imageUploader(fileBuffer,name,fileType)
-    if(!uploader){
+    const { name } = path.parse(req.file.originalname);
+    const fileBuffer = req.file.buffer;
+    const fileType = req.file.mimetype;
+    const uploader = await imageUploader(fileBuffer, name, fileType);
+    if (!uploader) {
       logger.error({
-       type:"uploader",
+        type: "uploader",
         message: "Error uploading file",
       });
-       res.status(500).json({
+      res.status(500).json({
         message: "internal server error",
       });
-      return
+      return;
     }
-    const imageUrl=uploader.secure_url as string
+    const imageUrl = uploader.secure_url as string;
     const { title, excerpt, content, published } = req.body as PostType;
     const authorId = req.userId as string;
-    const newPost:Post = await prisma.post.create({
+    const newPost: Post = await prisma.post.create({
       data: {
         title,
         imageUrl,
