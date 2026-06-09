@@ -1,0 +1,14 @@
+{"error":{"clientVersion":"7.8.0","name":"PrismaClientValidationError"},"level":"error","message":"Error during user registration","timestamp":"2026-06-09 16:10:39","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt","timestamp":"2026-06-09 16:17:34","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt","timestamp":"2026-06-09 16:17:44","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:30:59","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:35:20","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:36:31","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:38:10","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:41:34","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:42:36","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:44:14","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:59:10","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 17:08:46","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 17:10:34","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Login attempt with non-existent identifier: test@test.com","timestamp":"2026-06-09 17:15:07","type":"auth"}

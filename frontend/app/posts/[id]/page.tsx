@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { dummyTourismPosts } from "@/utils/static";
-import { Navbar } from "@/components/navbar";
 import { notFound } from "next/navigation";
 
 export default async function PostPage({

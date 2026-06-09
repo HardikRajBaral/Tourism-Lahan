@@ -8,7 +8,7 @@ export const createUser = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { email, name, password } = req.body;
+  const { email, username, password } = req.body;
 
   const existingUser = await prisma.user.findFirst({
     where: {
@@ -33,7 +33,7 @@ export const createUser = async (
     const user = await prisma.user.create({
       data: {
         email,
-        name,
+        username,
         password: hassedPassword,
       },
     });
@@ -50,8 +50,9 @@ export const createUser = async (
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 15 * 60 * 1000,
+      path: "/",
     });
     res.status(201).json({
       message: "user created successfully",
@@ -75,7 +76,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const user = await prisma.user.findFirst({
       where: {
-        OR: [{ email: identifier }, { name: identifier }],
+        OR: [{ email: identifier }, { username: identifier }],
       },
     });
     if (!user) {
@@ -109,8 +110,9 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 15 * 60 * 1000,
+      path: "/",
     });
 
     const refreshToken = RefreshToken(user.id, user.email);
@@ -153,7 +155,8 @@ export const logoutUser = async (
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "lax",
+    path: "/",
   });
   res.status(200).json({
     message: "Logged out successfully",

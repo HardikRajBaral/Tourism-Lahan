@@ -1,0 +1,4 @@
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:06:40"}
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:07:07"}
+{"error":{"clientVersion":"7.8.0","name":"PrismaClientValidationError"},"level":"error","message":"Error during user registration","timestamp":"2026-06-09 16:10:39","type":"auth"}
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:20:20"}

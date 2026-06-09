@@ -1,0 +1,86 @@
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 15:48:34"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 15:48:34"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 15:48:34"}
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:06:40"}
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:07:07"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:08:28"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:08:29"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:08:29"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:08:36"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:08:37"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:08:37"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:08:44"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:08:45"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:08:45"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:09:35"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:09:36"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:09:36"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:09:50"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:09:50"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:09:50"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:09:57"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:09:57"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:09:57"}
+{"error":{"clientVersion":"7.8.0","name":"PrismaClientValidationError"},"level":"error","message":"Error during user registration","timestamp":"2026-06-09 16:10:39","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:12:03"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:12:04"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:12:04"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:14:32"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:14:32"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:14:32"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt","timestamp":"2026-06-09 16:17:34","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt","timestamp":"2026-06-09 16:17:44","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:20:00"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:20:01"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:20:01"}
+{"level":"error","message":"Validation error:","timestamp":"2026-06-09 16:20:20"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:24:03"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:24:03"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:24:03"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:26:32"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:26:33"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:26:33"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:26:41"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:26:42"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:26:42"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:26:51"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:26:52"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:26:52"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:30:59","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:35:20","type":"auth"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:36:31","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:38:10"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:38:10"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:38:10"}
+{"ip":"::1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:38:10","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:38:29"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:38:29"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:38:29"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:38:49"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:38:49"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:38:49"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:41:34","type":"auth"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:42:36","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:43:56"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:43:56"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:43:56"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:44:08"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:44:08"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:44:08"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:44:14","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 16:58:48"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 16:58:48"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 16:58:49"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 16:59:10","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 17:08:31"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 17:08:31"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 17:08:31"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 17:08:46","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 17:10:01"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 17:10:02"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 17:10:02"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Unauthorized access attempt - no token in cookies","timestamp":"2026-06-09 17:10:34","type":"auth"}
+{"level":"info","message":"Connecting to Redis....","timestamp":"2026-06-09 17:14:53"}
+{"level":"info","message":"Redis client ready","timestamp":"2026-06-09 17:14:54"}
+{"level":"info","message":"Server running on [  http://localhost:5000  ]","timestamp":"2026-06-09 17:14:54"}
+{"ip":"::ffff:127.0.0.1","level":"warn","message":"Login attempt with non-existent identifier: test@test.com","timestamp":"2026-06-09 17:15:07","type":"auth"}

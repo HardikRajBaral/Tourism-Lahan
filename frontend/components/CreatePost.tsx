@@ -1,6 +1,6 @@
 "use client";
 
-import { PostSchema, postSchema } from "@/utils/zod";
+import { PostType, postSchema } from "@/utils/zod";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Image from "next/image";
@@ -15,7 +15,7 @@ export default function CreatePost() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<PostSchema>({
+  } = useForm<PostType>({
     resolver: zodResolver(postSchema),
   });
 
@@ -28,7 +28,7 @@ export default function CreatePost() {
     setPreview(url);
   };
 
-  const handlePost = async (data: PostSchema, published: boolean) => {
+  const handlePost = async (data: PostType, published: boolean) => {
     setError(null);
    try{
      const formData = new FormData();
@@ -133,14 +133,14 @@ export default function CreatePost() {
               >
                 <h3 className="text-lg font-semibold p-2">Cover Image</h3>
               </label>
-              <label htmlFor="image" className="cursor-pointer w-full h-64 border-2 border-dashed bg-gray-50 border-gray-300 rounded-md flex items-center justify-center">
+              <label htmlFor="image" className="cursor-pointer w-full h-64 border-2 border-dashed bg-gray-50 border-gray-300 rounded-md flex items-center justify-center overflow-hidden">
                 {preview ? (
                   <Image
                     src={preview}
                     alt="Cover Image Preview"
                     width={600}
                     height={400}
-                    className="mt-1 block w-full object-cover rounded-md shadow-sm"
+                    className="max-h-full w-auto object-contain rounded-md"
                   />
                 ) : (
                   <div className="flex flex-col items-center gap-2 text-gray-400">

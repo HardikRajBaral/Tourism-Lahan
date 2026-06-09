@@ -8,7 +8,7 @@ export const createPostSchema = z.object({
     .min(1, "Excerpt is required")
     .max(255, "Excerpt must be less than 255 characters"),
   content: z.string().min(1, "Content is required"),
-  published: z.boolean().default(false),
+  published: z.preprocess((val) => val === "true" || val === true, z.boolean()),
 });
 
 export const updatePostSchema = z.object({
@@ -19,11 +19,11 @@ export const updatePostSchema = z.object({
       .max(255, "Excerpt must be less than 255 characters")
       .optional(),
     content: z.string().min(1, "Content is required").optional(),
-    published: z.boolean().default(false).optional(),
+    published: z.preprocess((val) => val === "true" || val === true, z.boolean()),
 })
 
 export const createUserSchema = z.object({
-  name: z.string().min(1, "Name is required").regex(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores"),
+  username: z.string().min(1, "username is required").regex(/^[a-zA-Z0-9_]+$/, "username can only contain letters, numbers, and underscores"),
   email: z.email().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters long"),
 });

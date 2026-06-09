@@ -17,7 +17,7 @@ datasource db {
 model User { 
   id    String     @id @default(uuid()) 
   email String  @unique
-  name  String  @unique
+  username  String  @unique
   password String
   token Token?
   posts Post[]

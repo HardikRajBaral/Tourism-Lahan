@@ -1,6 +1,6 @@
 "use client";
 
-import { FormSchema, formSchema } from "@/utils/zod";
+import { LoginType, formSchema } from "@/utils/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleLogin = async (data: FormSchema) => {
+  const handleLogin = async (data: LoginType) => {
     setError(null);
     try {
       const res = await fetch("/api/v1/users/login", {
@@ -46,7 +46,7 @@ export default function LoginPage() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<FormSchema>({
+  } = useForm<LoginType>({
     resolver: zodResolver(formSchema),
   });
   return (

@@ -12,23 +12,14 @@ declare global {
 
 const authenticate = (req: Request, res: Response, next: NextFunction) => {
   try {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      logger.warn({
-        message: "Unauthorized access attempt",
-        type: "auth",
-        ip: req.ip,
-      });
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    const token = authHeader.split(" ")[1];
+    const token = req.cookies.accessToken;
     if (!token) {
-      logger.error({
-        message: "Token missing in authorization header",
+      logger.warn({
+        message: "Unauthorized access attempt - no token in cookies",
         type: "auth",
         ip: req.ip,
       });
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "Unauthorized from middleware" });
     }
     if (!process.env.JWT_SECRET) {
       logger.error({
