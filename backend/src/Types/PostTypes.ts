@@ -7,7 +7,7 @@ export type PostListItem = {
 
 export type PostDetail = {
   id: string;
-  image?: string;
+  imageUrl: string;
   title: string;
   excerpt: string;
   content: string;
@@ -18,7 +18,7 @@ export type PostDetail = {
 
 export type Post = {
   id: string;
-  image?: string;
+  imageUrl: string;
   title: string;
   excerpt: string;
   content: string;

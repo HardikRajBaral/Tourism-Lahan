@@ -26,7 +26,8 @@ model User {
 } 
 
 model Post { 
-  id        String      @id @default(uuid()) 
+  id        String      @id @default(uuid())
+  imageUrl     String
   title     String
   excerpt   String
   content   String

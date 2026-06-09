@@ -1,8 +1,8 @@
 import express from "express";
-import { limiter } from "../../lib/limiter";
+import { limiter } from "../lib/limiter";
 import { createPost, deletePost, getAllPosts, listPost, singlePost, updatePost } from "../contorller/post.controller";
 import authenticate from "../middleware/authmiddleware";
-import { createPostSchema, updatePostSchema } from "../../lib/validator";
+import { createPostSchema, updatePostSchema } from "../lib/validator";
 import { validationMiddleware } from "../middleware/validationMiddleware";
 import upload from "../middleware/multer";
 

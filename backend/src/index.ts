@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import { logger } from "../lib/logger";
+import { logger } from "./lib/logger";
 import postRouter from "./routes/post.routes";
 import userRouter from "./routes/user.routes";
-import { connectRedis } from "../lib/limiter";
+import { connectRedis } from "./lib/limiter";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";

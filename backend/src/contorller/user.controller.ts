@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-import { prisma } from "../../lib/prisma";
-import { logger } from "../../lib/logger";
+import { prisma } from "../lib/prisma";
+import { logger } from "../lib/logger";
 import bycript from "bcrypt";
-import { AccessToken, RefreshToken } from "../../lib/generateToken";
+import { AccessToken, RefreshToken } from "../lib/generateToken";
 
 export const createUser= async(req:Request,res:Response):Promise<void>=>{
     const {email,name,password}= req.body

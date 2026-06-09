@@ -1,11 +1,12 @@
 import type { Request, Response } from "express";
-import { type PostType } from "../../lib/validator";
-import { logger } from "../../lib/logger";
-import { prisma } from "../../lib/prisma";
-import type { Post, PostDetail, PostListItem } from "../../Types/PostTypes";
-import type { SortField, SortOrder } from "../../Types/FilterTypes";
+import { type PostType } from "../lib/validator";
+import { logger } from "../lib/logger";
+import { prisma } from "../lib/prisma";
+import type { Post, PostDetail, PostListItem } from "../Types/PostTypes";
+import type { SortField, SortOrder } from "../Types/FilterTypes";
 import cloudinary from "../config/cloudinary";
 import path from "path";
+import imageUploader from "../lib/uploader";
 
 
 export const createPost = async (
@@ -13,29 +14,33 @@ export const createPost = async (
   res: Response,
 ): Promise<void> => {
   try {
-    if(!req.file){
+      if(!req.file){
        res.status(400).json({
         message: "image is required",
       });
       return
     }
-    const image = req.file.buffer ;
-    const {name}= path.parse(req.file.originalname)
-    const fileBufferBase64 =`data:${req.file.mimetype};base64,${image.toString('base64')}`;
-    const result = await cloudinary.uploader.upload(fileBufferBase64, {
-      resource_type: "image",
-      folder: "tourism",
-      public_id:`post-${name}-${Date.now()}`,
-      transformation: {
-        quality: "auto",
-        fetch_format: "auto",
-      },
-    });
+    const {name}=path.parse(req.file.originalname)
+    const fileBuffer=req.file.buffer
+    const fileType=req.file.mimetype
+    const uploader= await imageUploader(fileBuffer,name,fileType)
+    if(!uploader){
+      logger.error({
+       type:"uploader",
+        message: "Error uploading file",
+      });
+       res.status(500).json({
+        message: "internal server error",
+      });
+      return
+    }
+    const imageUrl=uploader.secure_url as string
     const { title, excerpt, content, published } = req.body as PostType;
     const authorId = req.userId as string;
-    const newPost = await prisma.post.create({
+    const newPost:Post = await prisma.post.create({
       data: {
         title,
+        imageUrl,
         excerpt,
         content,
         published,
@@ -188,6 +193,7 @@ export const singlePost = async (
       },
       select: {
         id: true,
+        imageUrl: true,
         title: true,
         excerpt: true,
         content: true,
