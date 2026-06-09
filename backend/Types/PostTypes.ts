@@ -5,10 +5,9 @@ export type PostListItem = {
   published: boolean;
 };
 
-
-
 export type PostDetail = {
   id: string;
+  image?: string;
   title: string;
   excerpt: string;
   content: string;
@@ -17,13 +16,14 @@ export type PostDetail = {
   updatedAt: Date;
 };
 
-export type Post={
+export type Post = {
   id: string;
+  image?: string;
   title: string;
   excerpt: string;
   content: string;
   published: boolean;
   authorId: string;
   createdAt: Date;
-  updatedAt: Date; 
-}
+  updatedAt: Date;
+};

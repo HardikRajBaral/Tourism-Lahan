@@ -4,12 +4,33 @@ import { logger } from "../../lib/logger";
 import { prisma } from "../../lib/prisma";
 import type { Post, PostDetail, PostListItem } from "../../Types/PostTypes";
 import type { SortField, SortOrder } from "../../Types/FilterTypes";
+import cloudinary from "../config/cloudinary";
+import path from "path";
+
 
 export const createPost = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
   try {
+    if(!req.file){
+       res.status(400).json({
+        message: "image is required",
+      });
+      return
+    }
+    const image = req.file.buffer ;
+    const {name}= path.parse(req.file.originalname)
+    const fileBufferBase64 =`data:${req.file.mimetype};base64,${image.toString('base64')}`;
+    const result = await cloudinary.uploader.upload(fileBufferBase64, {
+      resource_type: "image",
+      folder: "tourism",
+      public_id:`post-${name}-${Date.now()}`,
+      transformation: {
+        quality: "auto",
+        fetch_format: "auto",
+      },
+    });
     const { title, excerpt, content, published } = req.body as PostType;
     const authorId = req.userId as string;
     const newPost = await prisma.post.create({

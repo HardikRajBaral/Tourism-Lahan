@@ -6,6 +6,7 @@ import userRouter from "./routes/user.routes";
 import { connectRedis } from "../lib/limiter";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import { globalErrorHandler } from "./middleware/globalErrorHandler";
 
 
 
@@ -22,6 +23,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser())
+app.use(globalErrorHandler)
 
 app.use('/api/v1/posts',postRouter)
 app.use('/api/v1/users',userRouter)
