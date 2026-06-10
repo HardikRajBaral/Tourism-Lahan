@@ -1,78 +1,33 @@
 "use client";
 
 import { Post } from "@/types/Post";
+import api from "@/utils/axios";
 import { Eye, Pencil, Trash2, Ellipsis } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
-
-export const dummyPosts: Post[] = [
-  {
-    id: "1",
-    title: "The Whispering Sands of Siwa",
-    excerpt: "A journey through the golden dunes of Egypt's most remote oasis.",
-    content:
-      "Siwa is one of Egypt's most isolated settlements, located near the Libyan border.",
-    image: "https://images.unsplash.com/photo-1539768942893-daf639082543?w=400",
-    published: true,
-    authorId: "user_1",
-    createdAt: new Date("2023-10-24"),
-    updatedAt: new Date("2023-10-25"),
-  },
-  {
-    id: "2",
-    title: "Finding Solitude in the High Alps",
-    excerpt:
-      "Switzerland's breathtaking peaks offer more than just scenic views.",
-    content:
-      "The Swiss Alps are a world unto themselves. Beyond the ski resorts and tourist trails lies a network of ancient paths.",
-    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=400",
-    published: false,
-    authorId: "user_1",
-    createdAt: new Date("2023-11-12"),
-    updatedAt: new Date("2023-11-13"),
-  },
-  {
-    id: "3",
-    title: "The Geometry of Jaipur",
-    excerpt:
-      "India's Pink City is a masterclass in Mughal architecture and color.",
-    content: "Jaipur was built in 1727 by Maharaja Jai Singh II.",
-    image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=400",
-    published: true,
-    authorId: "user_2",
-    createdAt: new Date("2023-09-05"),
-    updatedAt: new Date("2023-09-06"),
-  },
-  {
-    id: "4",
-    title: "A Rainy Tuesday in Montmartre",
-    excerpt: "Paris reveals its true soul on grey, quiet weekday mornings.",
-    content:
-      "Most tourists see Paris in the summer. But the city transforms in the rain.",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=400",
-    published: false,
-    authorId: "user_2",
-    createdAt: new Date("2023-12-01"),
-    updatedAt: new Date("2023-12-02"),
-  },
-  {
-    id: "5",
-    title: "Crossing the Sahara by Night",
-    excerpt: "When the sun sets, the world's largest desert comes alive.",
-    content:
-      "Traveling the Sahara by night is a completely different experience.",
-    image: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=400",
-    published: true,
-    authorId: "user_3",
-    createdAt: new Date("2024-01-15"),
-    updatedAt: new Date("2024-01-16"),
-  },
-];
+import React, { useEffect ,useState} from "react";
+import { toast } from "sonner";
 
 export default function Table() {
-  const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [posts,setPosts]= useState<Post[]>([]);
   const navigate = useRouter();
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const res = await api.get("/posts/mine");
+        setPosts(res.data)
+        console.log(res);
+      } catch {
+        setError("error while fetching data.");
+        toast.error("error while fetching data");
+      }
+    };
+    fetchPost();
+  }, []);
+
 
   const handlePreview = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -81,12 +36,23 @@ export default function Table() {
     e.stopPropagation();
     navigate.push(`/posts/${postId}`);
   };
+
+
   const handleEdit = () => {};
 
   const handleDelete = () => {};
 
   return (
     <div className="overflow-x-auto mt-16">
+      {error && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mt-4 mb-10 text-sm text-red-700 bg-red-50 border border-red-100 rounded-lg p-2"
+        >
+          {error}
+        </div>
+      )}
       <table className="min-w-full  block md:table">
         <thead className="block  md:table-header-group ">
           <tr className="border-b  p-2 border-gray-200 bg-blue-50">
@@ -96,7 +62,7 @@ export default function Table() {
           </tr>
         </thead>
         <tbody>
-          {dummyPosts.map((post) => (
+          {posts.map((post) => (
             <tr
               key={post.id}
               className=" p-2 border-b border-gray-200 block md:table-row"
@@ -106,7 +72,7 @@ export default function Table() {
                   <div className="w-16 h-16  rounded overflow-hidden">
                     <Image
                       className="object-cover w-full h-full"
-                      src={post.image}
+                      src={post.imageUrl}
                       alt={post.title}
                       width={64}
                       height={64}

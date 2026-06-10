@@ -8,7 +8,7 @@ export type Post = {
   title: string;
   excerpt: string;
   content: string;
-  image: string;        
+  imageUrl: string;        
   published: boolean;
   authorId: string;
   createdAt: Date;

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { dummyPosts } from "@/utils/static";
 import { notFound } from "next/navigation";
+import api from "@/utils/axios";
 
 export default async function PostPage({
   params,
@@ -8,10 +9,9 @@ export default async function PostPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  // Attempting to use the dummy data so it matches exactly the ID clicked on the home page.
-  // (You can replace this with your fetch logic once your API is fully ready)
-  const post = dummyPosts.find((p) => p.id === id);
+  const res= await api.get(`http://localhost:5000/api/v1/posts/${id}`)
+  console.log(res.data)
+  const post=res.data
 
   if (!post) {
     notFound();
@@ -23,7 +23,7 @@ export default async function PostPage({
       
       <div className="relative h-[75vh] w-full overflow-hidden">
         <Image
-          src={post.image}
+          src={post.imageUrl}
           alt={post.title}
           fill
           className="object-cover"
@@ -48,7 +48,7 @@ export default async function PostPage({
           </p>
 
           <div className="mt-12 text-sm text-gray-400 text-center border-t pt-4">
-            Published on: {post.updatedAt.toDateString()}
+            Published on: {new Date(post.updatedAt).toDateString()}
           </div>
         </div>
       </div>

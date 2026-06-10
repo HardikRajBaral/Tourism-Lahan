@@ -1,11 +1,14 @@
 import PlanYourTrip from "@/components/planYourTrip";
-import { dummyPosts } from "@/utils/static";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Contact } from "@/components/contact";
+import api from "@/utils/axios";
+import { Post } from "@/types/Post";
 
-export default function Home() {
+export default async function Home() {
+  const res = await api.get("http://localhost:5000/api/v1/posts");
+  const posts :Post[]= res.data;
   return (
     <main className="min-h-screen overflow-hidden">
      
@@ -48,7 +51,7 @@ export default function Home() {
             </span>
 
             <div className="space-y-6 w-full ">
-              {dummyPosts.map((post) => (
+              {posts.map((post) => (
                 <Link
                   key={post.id}
                   href={`/posts/${post.id}`}
@@ -56,7 +59,7 @@ export default function Home() {
                 >
                   <div className="md:w-2/5 shrink-0 h-48 relative overflow-hidden rounded-2xl">
                     <Image
-                      src={post.image}
+                      src={post.imageUrl}
                       alt={post.title}
                       fill
                       className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
@@ -71,7 +74,7 @@ export default function Home() {
                     </div>
                     <div className="flex items-center justify-between mt-4">
                       <p className="text-gray-500 px-3 py-1 rounded-md text-sm font-medium bg-gray-100">
-                        {post.updatedAt.toDateString()}
+                        {new Date(post.updatedAt).toDateString()}
                       </p>
                       <span className="text-blue-600 font-semibold flex items-center gap-2 group-hover:translate-x-2 transition-transform duration-300">
                         Read More <ArrowRight size={18} />
