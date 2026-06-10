@@ -1,3 +1,4 @@
+"use client"
 import { AuthContextProps } from "@/types/Auth";
 import api from "@/utils/axios";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -15,9 +16,11 @@ export const AuthContextPorvider = ({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        await api.get("/auth/me");
+        const data=await api.get("/auth/me");
+        console.log("me sucess",data)
         setIsAuthenticated(true);
-      } catch (error) {
+      } catch (error)  {
+        console.log("me error",error)
         setIsAuthenticated(false);
       } finally {
         setLoading(false);

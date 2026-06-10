@@ -1,19 +1,22 @@
+'use client'
+
 import { useAuth } from "@/context/authcontext";
 import Image from "next/image";
 import Link from "next/link";
 
 
 export const Navbar = () => {
-    const {isAuthenticated} = useAuth()
+    const {isAuthenticated,loading} = useAuth()
   const links = [
     { label: "Home", href: "/#home" , show: true},
     { label: "Places", href: "/#places" , show: true},
     { label: "About Us", href: "/#about",   show: true },
     { label: "Plan Your Trip", href: "/#plan-your-trip", show: true },
-    { label: "Contact", href: "/#contact", show: isAuthenticated  },
+    { label: "Contact", href: "/#contact", show: true  },
+    {label:"Dashboard",href:"/dashboard",show: isAuthenticated}
   ];
-
   return (
+    
     <nav className="w-full z-50 sticky -top-36 flex flex-col">
       <div className="relative h-36 w-full shrink-0">
         <Image

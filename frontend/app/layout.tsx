@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import {Toaster} from "sonner"
+import { Toaster } from "sonner";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import { AuthContextPorvider } from "@/context/authcontext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,11 +32,13 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth scroll-pt-[75px]`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
-        <Toaster richColors position="bottom-right" />
+        <AuthContextPorvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster richColors position="bottom-right" />
+        </AuthContextPorvider>
       </body>
     </html>
   );
-} 
+}

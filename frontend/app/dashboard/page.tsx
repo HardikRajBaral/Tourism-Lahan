@@ -7,6 +7,8 @@ import { useState } from "react";
 import Posts from "@/components/Posts";
 import Dashboard from "@/components/DashboardHomePage";
 import { NavItems } from "../../types/Post";
+import { useAuth } from "@/context/authcontext";
+import { redirect } from "next/navigation";
 
 export default function DashboardPage() {
   const [active, setActive] = useState<NavItems>("dashboard");
@@ -15,7 +17,10 @@ export default function DashboardPage() {
     posts: <Posts onNavigate={setActive} />,
     createPost: <CreatePost />,
   };
-
+  const { isAuthenticated } = useAuth()
+  if(!isAuthenticated){
+    redirect("/login")
+  }
   return (
     <div className="min-h-screen flex bg-gray-100">
       <div className="flex w-full">

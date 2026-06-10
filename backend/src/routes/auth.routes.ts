@@ -1,6 +1,6 @@
 import express from "express";
 import { authLimiter } from "../lib/limiter";
-import { createUser, loginUser,logoutUser, refreshAccessToken } from "../contorller/auth.controller";
+import { createUser, getMe, loginUser,logoutUser, refreshAccessToken } from "../contorller/auth.controller";
 import { validationMiddleware } from "../middleware/validationMiddleware";
 import { createUserSchema, loginUserSchema } from "../lib/validator";
 import authenticate from "../middleware/authmiddleware";
@@ -14,4 +14,5 @@ router.post("/register", validationMiddleware(createUserSchema), createUser)
 router.post("/login", validationMiddleware(loginUserSchema), loginUser)
 router.post("/logout", authenticate, logoutUser)
 router.post('/refresh', refreshAccessToken)
+router.get('/me', authenticate, getMe)
 export default router

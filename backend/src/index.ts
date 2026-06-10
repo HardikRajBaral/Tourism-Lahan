@@ -13,6 +13,8 @@ import { globalErrorHandler } from "./middleware/globalErrorHandler";
 const app =express()
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json())
+app.use(cookieParser())
 
 app.use(cors({
   origin: process.env.FRONTEND_URL || "http://localhost:3000",
@@ -21,13 +23,11 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }))
 
-app.use(express.json())
-app.use(cookieParser())
-app.use(globalErrorHandler)
 
 app.use('/api/v1/posts',postRouter)
 app.use('/api/v1/auth',authRouter)
 
+app.use(globalErrorHandler)
 
 const startServer= async()=>{
   connectRedis();

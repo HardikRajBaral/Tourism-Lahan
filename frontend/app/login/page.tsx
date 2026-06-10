@@ -18,7 +18,7 @@ export default function LoginPage() {
     setError(null);
     try {
       const res = await api.post("/auth/login", data);
-      sessionStorage.setItem("accessToken", res.data.token);
+      sessionStorage.setItem("accessToken", res.data.access);
       reset();
       toast.success("Logged in successfully!");
       setIsAuthenticated(true)

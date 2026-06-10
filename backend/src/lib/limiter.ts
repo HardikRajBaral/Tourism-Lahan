@@ -48,7 +48,7 @@ export const limiter = rateLimit({
 
 export const authLimiter = rateLimit({
     windowMs:15 * 60 *1000, //15 min
-    max:10,
+    max:100,
     message:"Too many requests, please try again after 15 minutes",
         store: new RedisStore({
             sendCommand:(...args:string[])=>client.sendCommand(args)

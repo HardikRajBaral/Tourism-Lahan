@@ -1,40 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import api from "@/utils/axios";
+import { useAuth } from "@/context/authcontext";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+ 
+  const {isAuthenticated,loading}  = useAuth()
+  const router = useRouter()
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = sessionStorage.getItem("accessToken");
+    
 
-      if (token) {
-        setAuthorized(true);
-        setLoading(false);
-        return;
+      if (!isAuthenticated && !loading) {
+          router.replace("/login")
       }
+  }, [loading,isAuthenticated]);
 
-      // no token → check cookie via /me
-      try {
-        await api.get("/auth/me");
-        setAuthorized(true);
-      } catch {
-        router.replace("/login");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    checkAuth();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (!authorized) return null;
+  if (loading) return <div className="flex flex-col items-center justify-center h-screen">
+    <h1 className="text-6xl font-bold">Loading...</h1>
+    <p className="text-xl">Please wait a moment.</p>
+  </div>;
+  if (!isAuthenticated) return null;
 
   return <>{children}</>;
 };
