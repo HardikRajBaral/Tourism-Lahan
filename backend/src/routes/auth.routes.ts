@@ -13,5 +13,5 @@ router.use(authLimiter)
 router.post("/register", validationMiddleware(createUserSchema), createUser)
 router.post("/login", validationMiddleware(loginUserSchema), loginUser)
 router.post("/logout", authenticate, logoutUser)
-
+router.post('/refresh', refreshAccessToken)
 export default router
