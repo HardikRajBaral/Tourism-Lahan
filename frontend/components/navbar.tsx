@@ -6,7 +6,7 @@ import Link from "next/link";
 
 
 export const Navbar = () => {
-    const {isAuthenticated,loading} = useAuth()
+    const {isAuthenticated} = useAuth()
   const links = [
     { label: "Home", href: "/#home" , show: true},
     { label: "Places", href: "/#places" , show: true},

@@ -16,11 +16,9 @@ export const AuthContextPorvider = ({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const data=await api.get("/auth/me");
-        console.log("me sucess",data)
+        await api.get("/auth/me");
         setIsAuthenticated(true);
-      } catch (error)  {
-        console.log("me error",error)
+      } catch  {
         setIsAuthenticated(false);
       } finally {
         setLoading(false);

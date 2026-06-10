@@ -1,9 +1,16 @@
-import ProtectedRoute from "@/components/protectedRoute";
+import ProtectedRoute from "@/components/Dashboard/protectedRoute";
+import { DashboardContextProvider } from "@/context/dashboardContext";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <ProtectedRoute>
-      {children}
+      <DashboardContextProvider>
+        {children}
+        </DashboardContextProvider>
     </ProtectedRoute>
   );
 }
