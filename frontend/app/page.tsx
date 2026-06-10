@@ -1,5 +1,5 @@
 import PlanYourTrip from "@/components/planYourTrip";
-import { dummyTourismPosts } from "@/utils/static";
+import { dummyPosts } from "@/utils/static";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,7 +48,7 @@ export default function Home() {
             </span>
 
             <div className="space-y-6 w-full ">
-              {dummyTourismPosts.map((post) => (
+              {dummyPosts.map((post) => (
                 <Link
                   key={post.id}
                   href={`/posts/${post.id}`}

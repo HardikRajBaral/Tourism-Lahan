@@ -5,7 +5,7 @@ import DashBoardContent from "@/components/DashboardWrapper";
 import CreatePost from "@/components/CreatePost";
 import { useState } from "react";
 import Posts from "@/components/Posts";
-import Dashboard from "@/components/Dashboard";
+import Dashboard from "@/components/DashboardHomePage";
 import { NavItems } from "../../types/type";
 
 export default function DashboardPage() {

@@ -3,6 +3,7 @@
 import { Post } from "@/types/type";
 import { Eye, Pencil, Trash2, Ellipsis } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export const dummyPosts: Post[] = [
@@ -71,6 +72,17 @@ export const dummyPosts: Post[] = [
 
 export default function Table() {
   const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
+  const navigate = useRouter();
+
+  const handlePreview = (e: React.MouseEvent<HTMLButtonElement>, postId: string) => {
+    e.stopPropagation()
+    navigate.push(`/posts/${postId}`)
+  };
+const handleEdit = () => {}
+
+const handleDelete = () => {}
+
+
   return (
     <div className="overflow-x-auto mt-16">
       <table className="min-w-full  block md:table">
@@ -124,15 +136,24 @@ export default function Table() {
                   {activeMenu === post.id && (
                     <div className="z-50 absolute right-0 top-full mt-1 w-48 -translate-x-1/7 rounded-2xl bg-white shadow-lg border border-gray-200">
                       <div className="flex flex-col p-2">
-                        <button className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100">
+                        <button
+                          onClick={(e) => handlePreview(e, post.id)}
+                          className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100"
+                        >
                           <Eye size={16} />
                           <span>view</span>
                         </button>
-                        <button className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100">
+                        <button
+                          onClick={handleEdit}
+                          className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100"
+                        >
                           <Pencil size={16} />
                           <span>edit</span>
                         </button>
-                        <button className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100">
+                        <button
+                          onClick={handleDelete}
+                          className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100"
+                        >
                           <Trash2 size={16} />
                           <span>delete</span>
                         </button>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { dummyTourismPosts } from "@/utils/static";
+import { dummyPosts } from "@/utils/static";
 import { notFound } from "next/navigation";
 
 export default async function PostPage({
@@ -11,7 +11,7 @@ export default async function PostPage({
 
   // Attempting to use the dummy data so it matches exactly the ID clicked on the home page.
   // (You can replace this with your fetch logic once your API is fully ready)
-  const post = dummyTourismPosts.find((p) => p.id === id);
+  const post = dummyPosts.find((p) => p.id === id);
 
   if (!post) {
     notFound();
