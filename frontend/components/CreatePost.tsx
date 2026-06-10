@@ -7,6 +7,7 @@ import Image from "next/image";
 import { ImagePlus } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import api from "@/utils/axios";
 export default function CreatePost() {
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -41,18 +42,9 @@ export default function CreatePost() {
       .files?.[0];
     if (imageFile) formData.append("image", imageFile);
     
-    const res= await fetch("/api/v1/posts",{
-      method:"POST",
-      body:formData,
-      credentials:"include"
-    })
-    const responseData = await res.json();
-    if(!res.ok) {
-      const message =responseData.message || "Failed to create post";
-      setError(message);
-      toast.error(message);
-      return;
-    }
+     await api.post("/posts",formData);
+
+
     toast.success(published ? "Post published!" : "Draft saved!");
     reset();
     setPreview(null);

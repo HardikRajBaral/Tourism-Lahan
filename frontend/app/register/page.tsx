@@ -6,32 +6,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import api from "@/utils/axios";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  const handleLogin = async (data: RegisterType) => {
+  const handleRegister = async (data: RegisterType) => {
     setError(null);
     try {
-      const res = await fetch("/api/v1/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
-
-      const responseData = await res.json();
-
-      if (!res.ok) {
-        const message = responseData.message || "Registration failed";
-        setError(message);
-        toast.error(message);
-        return;
-      }
-
+       await api.post("/auth/register", data);
       reset();
       toast.success("Registered successfully!");
       router.push("/login");
@@ -65,7 +49,7 @@ export default function LoginPage() {
           )}
         </div>
         <div className="mb-4">
-          <form onSubmit={handleSubmit(handleLogin)} className="space-y-4 ">
+          <form onSubmit={handleSubmit(handleRegister)} className="space-y-4 ">
             {/*username  */}
             <div>
               <label

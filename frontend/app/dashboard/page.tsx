@@ -6,7 +6,7 @@ import CreatePost from "@/components/CreatePost";
 import { useState } from "react";
 import Posts from "@/components/Posts";
 import Dashboard from "@/components/DashboardHomePage";
-import { NavItems } from "../../types/type";
+import { NavItems } from "../../types/Post";
 
 export default function DashboardPage() {
   const [active, setActive] = useState<NavItems>("dashboard");

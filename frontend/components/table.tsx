@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/types/type";
+import { Post } from "@/types/Post";
 import { Eye, Pencil, Trash2, Ellipsis } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -74,14 +74,16 @@ export default function Table() {
   const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
   const navigate = useRouter();
 
-  const handlePreview = (e: React.MouseEvent<HTMLButtonElement>, postId: string) => {
-    e.stopPropagation()
-    navigate.push(`/posts/${postId}`)
+  const handlePreview = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    postId: string,
+  ) => {
+    e.stopPropagation();
+    navigate.push(`/posts/${postId}`);
   };
-const handleEdit = () => {}
+  const handleEdit = () => {};
 
-const handleDelete = () => {}
-
+  const handleDelete = () => {};
 
   return (
     <div className="overflow-x-auto mt-16">

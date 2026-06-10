@@ -210,3 +210,27 @@ export const refreshAccessToken = async (
       .json({ message: "Refresh token expired, please login again" });
   }
 };
+
+export const getMe = async (req: Request, res: Response): Promise<void> => {
+  const userId = req.userId as string;
+  const user = await prisma.user.findFirst({
+    where: {
+      id: userId,
+    },
+    select: {
+      id: true
+    },
+  })
+  if(!user){
+    logger.error({
+      type:"auth",
+      message:"User not found",
+      userId
+    })
+    res.status(401).json({
+      message:"User not found"
+    })
+    return
+  }
+  res.status(200).json(user)
+}

@@ -5,41 +5,28 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
+import api from "@/utils/axios";
+import { useAuth } from "@/context/authcontext";
 
 export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const {setIsAuthenticated } =useAuth()
 
   const handleLogin = async (data: LoginType) => {
     setError(null);
     try {
-      const res = await fetch("/api/v1/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        credentials: "include",
-      });
-
-      const responseData = await res.json();
-
-      if (!res.ok) {
-        const message = responseData.message || "Login failed";
-        setError(message);
-        toast.error(message);
-        return;
-      }
-
+      const res = await api.post("/auth/login", data);
+      sessionStorage.setItem("accessToken", res.data.token);
       reset();
       toast.success("Logged in successfully!");
+      setIsAuthenticated(true)
       router.push("/dashboard");
     } catch {
       setError("Unable to login. Please try again.");
       toast.error("Unable to login. Please try again.");
     }
-
   };
   const {
     register,

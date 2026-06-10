@@ -1,4 +1,4 @@
-import { PostProps } from "@/types/type";
+import { PostProps } from "@/types/Post";
 import { CirclePlus, Search, ChevronDown } from "lucide-react";
 import Table from "./table";
 
