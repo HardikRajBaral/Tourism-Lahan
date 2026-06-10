@@ -14,7 +14,7 @@ export default function LoginPage() {
   const handleLogin = async (data: LoginType) => {
     setError(null);
     try {
-      const res = await fetch("/api/v1/users/login", {
+      const res = await fetch("/api/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

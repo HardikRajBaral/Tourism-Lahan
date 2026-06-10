@@ -2,7 +2,11 @@ import type { Request, Response } from "express";
 import { prisma } from "../config/prisma";
 import { logger } from "../lib/logger";
 import bycript from "bcrypt";
-import { AccessToken, RefreshToken } from "../lib/generateToken";
+import {
+  AccessToken,
+  RefreshToken,
+  verifyRefreshToken,
+} from "../lib/generateToken";
 
 export const createUser = async (
   req: Request,
@@ -161,4 +165,48 @@ export const logoutUser = async (
   res.status(200).json({
     message: "Logged out successfully",
   });
+};
+
+// auth.controller.ts
+export const refreshAccessToken = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  const token = req.cookies?.refreshToken as string | undefined;
+
+  if (!token) {
+    res.status(401).json({ message: "No refresh token" });
+    return;
+  }
+
+  try {
+    const payload = verifyRefreshToken(token);
+
+    // Check it matches what's stored in DB
+    const stored = await prisma.token.findFirst({
+      where: { userId: payload.userId, token },
+    });
+
+    if (!stored) {
+      res.status(401).json({ message: "Invalid refresh token" });
+      return;
+    }
+
+    const newAccessToken = AccessToken(payload.userId, payload.email);
+
+    res.cookie("accessToken", newAccessToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 15 * 60 * 1000,
+      path: "/",
+    });
+
+    res.status(200).json({ accessToken: newAccessToken });
+  } catch (err) {
+    // Refresh token expired or tampered
+    res
+      .status(401)
+      .json({ message: "Refresh token expired, please login again" });
+  }
 };

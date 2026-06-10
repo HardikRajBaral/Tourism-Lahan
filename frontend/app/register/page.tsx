@@ -14,7 +14,7 @@ export default function LoginPage() {
   const handleLogin = async (data: RegisterType) => {
     setError(null);
     try {
-      const res = await fetch("/api/v1/users/register", {
+      const res = await fetch("/api/v1/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

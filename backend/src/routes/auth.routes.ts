@@ -1,6 +1,6 @@
 import express from "express";
 import { authLimiter } from "../lib/limiter";
-import { createUser, loginUser,logoutUser } from "../contorller/user.controller";
+import { createUser, loginUser,logoutUser, refreshAccessToken } from "../contorller/auth.controller";
 import { validationMiddleware } from "../middleware/validationMiddleware";
 import { createUserSchema, loginUserSchema } from "../lib/validator";
 import authenticate from "../middleware/authmiddleware";
