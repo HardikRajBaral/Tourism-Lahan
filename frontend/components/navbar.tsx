@@ -51,7 +51,7 @@ export const Navbar = () => {
         </div>
       </div>
 
-      <div className="bg-white flex justify-center items-center gap-1 px-6 py-2 shadow-md">
+      <div className="bg-white flex justify-center h-12 items-center gap-1 px-6 py-2 shadow-md">
         {links.map((link) => (
          link.show ?(
            <Link
