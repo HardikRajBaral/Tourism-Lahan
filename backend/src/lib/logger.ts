@@ -65,5 +65,10 @@ export const logger = winston.createLogger({
       format: combine(filterLogs("uploader"), FileFormat),
       level: "error",
     }),
+    new winston.transports.File({
+      filename: path.join(logDir, "email.log"),
+      format: combine(filterLogs("email"), FileFormat),
+      level: "error",
+    }),
   ],
 });

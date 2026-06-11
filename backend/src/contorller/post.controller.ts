@@ -7,6 +7,7 @@ import type { SortField, SortOrder } from "../Types/FilterTypes";
 
 import path from "path";
 import imageUploader from "../lib/uploader";
+import cloudinary from "../config/cloudinary";
 
 export const createPost = async (
   req: Request,
@@ -34,12 +35,14 @@ export const createPost = async (
       return;
     }
     const imageUrl = uploader.secure_url as string;
+    const publicId = uploader.public_id as string;
     const { title, excerpt, content, published } = req.body as PostType;
     const authorId = req.userId as string;
     const newPost: Post = await prisma.post.create({
       data: {
         title,
         imageUrl,
+        publicId,
         excerpt,
         content,
         published,
@@ -257,6 +260,7 @@ export const deletePost = async (req: Request, res: Response) => {
         message: "Forbidden: You are not the author of this post",
       });
     }
+    await cloudinary.uploader.destroy(canDelete.publicId)
     const post = await prisma.post.delete({
       where: {
         id: req.params.id as string,

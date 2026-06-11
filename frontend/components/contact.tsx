@@ -65,26 +65,17 @@ export const Contact = () => {
               Send us a Message
             </h3>
             <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="firstName" className="block text-sm font-semibold text-gray-800 mb-2">First Name *</label>
+              <div >
+  
+                  <label htmlFor="fullname" className="block text-sm font-semibold text-gray-800 mb-2">Full Name *</label>
                   <input 
                     type="text" 
-                    id="firstName" 
+                    id="fullname" 
                     required
                     className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors rounded-none"
                   />
                 </div>
-                <div>
-                  <label htmlFor="lastName" className="block text-sm font-semibold text-gray-800 mb-2">Last Name *</label>
-                  <input 
-                    type="text" 
-                    id="lastName" 
-                    required
-                    className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors rounded-none"
-                  />
-                </div>
-              </div>
+
 
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-gray-800 mb-2">Email Address *</label>

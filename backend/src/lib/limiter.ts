@@ -56,3 +56,15 @@ export const authLimiter = rateLimit({
     legacyHeaders:false,
     standardHeaders:true,
 })
+
+
+export const emailLimiter = rateLimit({
+    windowMs:15 * 60 *1000, //15 min
+    max:20,
+    message:"Too many requests, please try again after 15 minutes",
+        store: new RedisStore({
+            sendCommand:(...args:string[])=>client.sendCommand(args)
+        }),
+    legacyHeaders:false,
+    standardHeaders:true,
+})
