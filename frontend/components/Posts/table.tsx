@@ -1,5 +1,6 @@
 "use client";
 
+import { useDashboard } from "@/context/dashboardContext";
 import { Post } from "@/types/Post";
 import api from "@/utils/axios";
 import { Eye, Pencil, Trash2, Ellipsis } from "lucide-react";
@@ -12,7 +13,9 @@ export default function Table() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [posts,setPosts]= useState<Post[]>([]);
-  const navigate = useRouter();
+  const { setPostId,setActive } = useDashboard();
+  const navigate = useRouter()
+
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -38,12 +41,17 @@ export default function Table() {
   };
 
 
-  const handleEdit = () => {};
+  const handleEdit = (postId:string) => {
+    setActiveMenu(null)
+    setPostId(postId)
+    setActive('editPost')
+  };
+
 
   const handleDelete = () => {};
 
   return (
-    <div className="overflow-x-auto mt-16">
+    <div className="overflow-visible mt-16">
       {error && (
         <div
           role="alert"
@@ -94,7 +102,7 @@ export default function Table() {
               <td className="p-2  block md:table-cell">
                 <div className="relative group ">
                   <button
-                    className="flex items-center w-full gap-1 text-gray-600 justify-center"
+                    className="flex items-center w-full gap-1 text-gray-600 justify-center "
                     onClick={() =>
                       setActiveMenu(activeMenu === post.id ? null : post.id)
                     }
@@ -112,7 +120,7 @@ export default function Table() {
                           <span>view</span>
                         </button>
                         <button
-                          onClick={handleEdit}
+                          onClick={()=>(handleEdit(post.id))}
                           className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100"
                         >
                           <Pencil size={16} />

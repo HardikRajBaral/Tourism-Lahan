@@ -6,25 +6,30 @@ import Posts from "@/components/Posts/Posts";
 import { dashboardContextProps } from "@/types/dashboard";
 import { NavItems } from "@/types/Post";
 import { createContext, useContext, useState } from "react";
+import EditPost from "@/components/Posts/EditPost";
 
 
 
 const DashboardContext= createContext<dashboardContextProps>({
     active :'dashboard',
     setActive:()=>{},
-    pages:{}
+    pages:{},
+    setPostId:()=>{}
+
 })
 
 export const DashboardContextProvider=({children}:{children:React.ReactNode
 })=>{
     const [active,setActive]= useState('dashboard')
-      const pages: Record<NavItems, React.ReactNode> = {
+    const [postId, setPostId] = useState<string | null>(null);
+    const pages: Record<NavItems, React.ReactNode> = {
     dashboard: <Dashboard />,
     posts: <Posts onNavigate={setActive} />,
     createPost: <CreatePost />,
+    editPost: postId? <EditPost id={postId} />: null,
   };
     return(
-        <DashboardContext.Provider value={{active,setActive,pages}}>
+        <DashboardContext.Provider value={{active,setActive,pages,setPostId}}>
             {children}
         </DashboardContext.Provider>
     )

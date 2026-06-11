@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { dummyPosts } from "@/utils/static";
 import { notFound } from "next/navigation";
 import api from "@/utils/axios";
 

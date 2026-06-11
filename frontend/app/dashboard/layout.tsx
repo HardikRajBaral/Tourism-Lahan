@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/Dashboard/protectedRoute";
+import ProtectedRoute from "@/components/protectedRoute";
 import { DashboardContextProvider } from "@/context/dashboardContext";
 
 export default function DashboardLayout({

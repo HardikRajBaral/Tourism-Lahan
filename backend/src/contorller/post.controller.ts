@@ -184,11 +184,15 @@ export const singlePost = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
+  const userId = req.userId as string;
   try {
     const post: PostDetail | null = await prisma.post.findFirst({
       where: {
         id: req.params.id as string,
-        published: true,
+        OR:[
+          {published: true},
+          ...(userId ? [{authorId: userId}]:[])
+        ]
       },
       select: {
         id: true,
