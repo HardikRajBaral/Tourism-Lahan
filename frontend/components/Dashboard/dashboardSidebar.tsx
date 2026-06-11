@@ -1,14 +1,33 @@
+import { useAuth } from "@/context/authcontext";
 import { useDashboard } from "@/context/dashboardContext";
-import Image from "next/image";
+import api from "@/utils/axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export const DashboardSidebar = () => {
   const { active, setActive } = useDashboard();
+  const {isAuthenticated,setIsAuthenticated} = useAuth()
+  const router = useRouter()
+
+    function handleLogout(): void {
+     try{
+      api.post('/auth/logout')
+      toast.success("logged out successfully")
+      setIsAuthenticated(false)
+      router.push('/')
+     }catch{
+      toast.error("error while logging out")
+     }
+    }
+  
+
   return (
     <div className="min-h-screen flex bg-gray-100">
       <div className="flex w-full">
         <aside className="flex flex-col items-start w-64 justify-start bg-blue-50 border-r border-gray-300">
           <div className="p-6 mb-6 border-b border-gray-300 w-full">
-             <div className="flex flex-col items-center ">
+            <div className="flex flex-col items-center ">
               <h1 className="text-2xl font-bold">DashBoard</h1>
               <p className="text-xs text-gray-600">Welcom To Dashboard.</p>
             </div>
@@ -48,6 +67,17 @@ export const DashboardSidebar = () => {
             >
               Create Post
             </button>
+            {isAuthenticated ? (
+              <button
+                onClick={handleLogout}
+                className="w-full text-left px-4 py-2  transition  hover:bg-red-500 hover:text-white"
+               
+              >
+                Logout
+              </button>
+            ) : (
+              <Link href="/" />
+            )}
           </nav>
         </aside>
       </div>

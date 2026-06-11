@@ -48,7 +48,18 @@ export default function Table() {
   };
 
 
-  const handleDelete = () => {};
+  const handleDelete = (postId:string) => {
+    try{
+      api.delete(`/posts/${postId}`)
+      toast.success("post deleted successfully")
+      setPosts(prev=>prev.filter(post=>post.id !== postId))
+      setActiveMenu(null)
+    }
+    catch{
+      toast.error("Error while deleting post")
+      setError("could not delete post")
+    }
+  };
 
   return (
     <div className="overflow-visible mt-16">
@@ -127,7 +138,7 @@ export default function Table() {
                           <span>edit</span>
                         </button>
                         <button
-                          onClick={handleDelete}
+                          onClick={()=>handleDelete(post.id)}
                           className="flex w-full items-center justify-start gap-2 border-b border-gray-300 bg-blue-50 px-4 py-2 text-left hover:bg-blue-100"
                         >
                           <Trash2 size={16} />
