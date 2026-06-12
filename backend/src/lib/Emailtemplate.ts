@@ -14,7 +14,7 @@ export const emailTemplate = (fullname: string, email: string, subject: string, 
     .value { font-size: 15px; color: #333; padding: 10px 14px; background: #f9f9f9; border-left: 4px solid #1a6b3c; border-radius: 4px; }
     .message-value { white-space: pre-wrap; line-height: 1.6; }
     .footer { background: #f4f4f4; padding: 16px; text-align: center; font-size: 12px; color: #aaa; }
-    .reply-btn { display: inline-block; margin-top: 24px; padding: 12px 24px; background-color: #1a6b3c; color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 14px; }
+    .reply-btn { display: inline-block; margin-top: 24px; padding: 12px 24px; background-color: #1a6b3c; color: #ffffff !important; text-decoration: none; border-radius: 6px; font-size: 14px; }
   </style>
 </head>
 <body>

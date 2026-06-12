@@ -11,7 +11,7 @@ import EditPost from "@/components/Posts/EditPost";
 
 
 const DashboardContext= createContext<dashboardContextProps>({
-    active :'dashboard',
+    active :'posts',
     setActive:()=>{},
     pages:{},
     setPostId:()=>{}
@@ -20,10 +20,10 @@ const DashboardContext= createContext<dashboardContextProps>({
 
 export const DashboardContextProvider=({children}:{children:React.ReactNode
 })=>{
-    const [active,setActive]= useState('dashboard')
+    const [active,setActive]= useState('posts')
     const [postId, setPostId] = useState<string | null>(null);
     const pages: Record<NavItems, React.ReactNode> = {
-    dashboard: <Dashboard />,
+    
     posts: <Posts onNavigate={setActive} />,
     createPost: <CreatePost />,
     editPost: postId? <EditPost id={postId} />: null,

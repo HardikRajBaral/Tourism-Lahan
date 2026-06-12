@@ -1,6 +1,33 @@
+"use client"
+
+import api from "@/utils/axios";
+import { contactSchema, ContactType } from "@/utils/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export const Contact = () => {
+
+  const handleContact=(data:ContactType)=>{
+    try{
+      api.post("/email/contact",data)
+      toast.success("We have received your message.")
+      reset()
+    }catch{
+      toast.error("failed to submit your message !")
+
+    }
+
+  }
+  const {
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors, isSubmitting },
+    } = useForm<ContactType>({
+      resolver: zodResolver(contactSchema),
+    });
   return (
     <section id="contact" className="w-full py-16 flex flex-col items-center justify-center border-t border-gray-100">
       <div className="w-full md:w-3/4 lg:w-1/2">
@@ -64,16 +91,18 @@ export const Contact = () => {
             <h3 className="text-2xl font-serif font-bold text-gray-900 mb-8 pb-4 border-b border-gray-200">
               Send us a Message
             </h3>
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit(handleContact)}>
               <div >
   
                   <label htmlFor="fullname" className="block text-sm font-semibold text-gray-800 mb-2">Full Name *</label>
                   <input 
                     type="text" 
                     id="fullname" 
+                    {...register("fullname")}
                     required
                     className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors rounded-none"
                   />
+                  {errors.fullname && <p className="text-red-500 text-sm mt-1">{errors.fullname.message}</p>}
                 </div>
 
 
@@ -82,35 +111,43 @@ export const Contact = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  {...register("email")}
                   required
                   className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors rounded-none"
                 />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-semibold text-gray-800 mb-2">Subject</label>
                 <input 
                   type="text" 
+                  {...register('subject')}
                   id="subject" 
                   className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors rounded-none"
                 />
+                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>}
               </div>
 
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-800 mb-2">Message *</label>
                 <textarea 
                   id="message" 
+                  {...register("message")}
                   rows={6}
                   required
                   className="w-full px-4 py-3 bg-white border border-gray-300 focus:ring-0 focus:border-blue-900 outline-none transition-colors resize-y rounded-none"
                 ></textarea>
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
               </div>
 
               <button 
-                type="button" 
+                type="submit" 
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
                 className="bg-[#0f2146] hover:bg-blue-800 text-white font-medium py-3.5 px-10 transition-colors rounded-none tracking-wider uppercase text-sm mt-4"
               >
-                Submit Enquiry
+               {isSubmitting?'submitting...':'Submit Enquiry'}
               </button>
             </form>
           </div>

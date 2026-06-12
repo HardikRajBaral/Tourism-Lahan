@@ -7,6 +7,7 @@ import { connectRedis } from "./lib/limiter";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { globalErrorHandler } from "./middleware/globalErrorHandler";
+import emailRouter from "./routes/email.routes";
 
 
 
@@ -26,6 +27,7 @@ app.use(cors({
 
 app.use('/api/v1/posts',postRouter)
 app.use('/api/v1/auth',authRouter)
+app.use('/api/v1/email',emailRouter)
 
 app.use(globalErrorHandler)
 

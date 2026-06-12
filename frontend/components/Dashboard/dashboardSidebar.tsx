@@ -34,17 +34,6 @@ export const DashboardSidebar = () => {
 
             <nav className="w-full space-y-2">
               <button
-                onClick={() => setActive("dashboard")}
-                className={`w-full text-left px-4 py-2  transition
-                ${
-                  active === "dashboard"
-                    ? "bg-blue-500 text-white"
-                    : "hover:bg-gray-100 text-gray-700"
-                }`}
-              >
-                Dashboard
-              </button>
-              <button
                 onClick={() => setActive("posts")}
                 className={`w-full text-left px-4 py-2  transition
                       ${

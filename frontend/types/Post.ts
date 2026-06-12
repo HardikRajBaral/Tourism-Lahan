@@ -1,4 +1,4 @@
-export type NavItems = "dashboard" | "posts" | "createPost" | "editPost";
+export type NavItems =  "posts" | "createPost" | "editPost";
 export type PostProps = {
   onNavigate: (page: NavItems | string) => void;
 };

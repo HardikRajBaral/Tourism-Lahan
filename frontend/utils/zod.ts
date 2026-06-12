@@ -22,6 +22,15 @@ export const registerSchema=z.object({
   password:z.string().min(8,"password is too short")
 })
 
+export const contactSchema=z.object({
+  fullname:z.string().min(1,"fullname is required"),
+  email:z.email("Invalid email address"),
+  subject:z.string().min(5,"subject is too short"),
+  message:z.string().min(10,"message is too short")
+})
+
+export type ContactType=z.infer<typeof contactSchema>
+
 export type RegisterType=z.infer<typeof registerSchema>
 
 export type LoginType = z.infer<typeof formSchema>;
